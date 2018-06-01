@@ -1,4 +1,4 @@
-import express from 'express'
+import * as express from 'express'
 import * as movieService from '../services/movie-service'
 import { Request, Response, NextFunction } from 'express'
 

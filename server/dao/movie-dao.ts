@@ -1,6 +1,7 @@
-import aws from 'aws-sdk'
+import * as aws from 'aws-sdk'
 import { ConfigurationOptions } from 'aws-sdk/lib/config' // type
-import dotenv from 'dotenv'
+import * as dotenv from 'dotenv'
+// import 'dotenv/config'
 
 // enable environment variables
 dotenv.config()
