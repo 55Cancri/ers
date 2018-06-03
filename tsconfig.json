@@ -5,9 +5,11 @@
     "noImplicitAny": false,
     "allowSyntheticDefaultImports": true,
     "module": "commonjs",
+    "esModuleInterop": true,
+    "moduleResolution": "node",
     "target": "es5",
     "jsx": "react",
-    "lib": ["dom", "es6", "es2015.promise"]
+    "lib": ["dom", "es2018", "es2015.promise"]
   },
   "include": ["./client/**/*"]
   // {

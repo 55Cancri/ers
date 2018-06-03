@@ -1,43 +1,68 @@
-// export const webpackConfig = {
-import * as webpack from 'webpack'
+import webpack from 'webpack'
+import path from 'path'
+import HtmlWebpackPlugin from 'html-webpack-plugin'
 
 const config: webpack.Configuration = {
   entry: {
-    app: './client/app/app.tsx'
+    app: ['./client/app/app.tsx', 'webpack-hot-middleware/client?reload=true']
+    // app: './client/app/app.tsx'
   },
   output: {
+    path: path.resolve(__dirname, 'dist'),
+    publicPath: '/',
     filename: 'bundle.js',
-    path: __dirname + '/dist',
-    publicPath: '/'
+    chunkFilename: '[id].chunk.js'
   },
 
   // Enable sourcemaps for debugging webpack's output.
-  devtool: 'source-map',
+  devtool: 'cheap-module-source-map',
 
   mode: 'development',
 
   resolve: {
     // Add '.ts' and '.tsx' as resolvable extensions.
-    extensions: ['.ts', '.tsx', '.js', '.json']
+    extensions: ['.ts', '.tsx', '.js', '.json'],
+    alias: {
+      app: 'client/app'
+    }
   },
 
   module: {
     rules: [
       // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
-      { test: /\.tsx?$/, loader: 'awesome-typescript-loader' },
+      {
+        test: /\.tsx?$/,
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              babelrc: false,
+              plugins: ['react-hot-loader/babel']
+            }
+          },
+          'awesome-typescript-loader'
+        ]
+      },
 
       // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
       { enforce: 'pre', test: /\.js$/, loader: 'source-map-loader' }
     ]
   },
 
-  // When importing a module whose path matches one of the following, just
-  // assume a corresponding global variable exists and use that instead.
-  // This is important because it allows us to avoid bundling all of our
-  // dependencies, which allows browsers to cache those libraries between builds.
-  externals: {
-    react: 'React',
-    'react-dom': 'ReactDOM'
+  plugins: [
+    // webpack, not react hmr
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NamedModulesPlugin(),
+    new HtmlWebpackPlugin({
+      template: './client/public/index.html',
+      inject: 'body'
+    })
+  ],
+
+  devServer: {
+    contentBase: './client/public',
+    historyApiFallback: true,
+    stats: 'minimal' // none (or false), errors-only, minimal, normal (or true) and verbose
   }
 }
 

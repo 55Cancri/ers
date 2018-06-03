@@ -1,18 +1,18 @@
-import * as express from 'express'
+import express from 'express'
 import { Request, Response, NextFunction } from 'express'
 import router from './routers/router'
-import * as bodyParser from 'body-parser'
-import * as path from 'path'
-import * as fs from 'fs'
+import bodyParser from 'body-parser'
+import path from 'path'
+import fs from 'fs'
 import * as movieDao from './dao/movie-dao'
 
 // connect webpack to express server
-import * as webpack from 'webpack'
+import webpack from 'webpack'
 import webpackConfig from '../webpack.config'
-import * as webpackDevServer from 'webpack-dev-server'
-import * as webpackDevMiddleware from 'webpack-dev-middleware'
-import * as webpackHotMiddleware from 'webpack-hot-middleware'
-import * as historyApiFallback from 'connect-history-api-fallback'
+import webpackDevServer from 'webpack-dev-server'
+import webpackDevMiddleware from 'webpack-dev-middleware'
+import webpackHotMiddleware from 'webpack-hot-middleware'
+import historyApiFallback from 'connect-history-api-fallback'
 
 const app = express()
 
@@ -27,7 +27,9 @@ app.set('port', port)
 app.use(bodyParser.json())
 
 // setup routes
-app.use('/movies', router)
+// app.use('/', router)
+import Routes from './routers/router'
+const routes = Routes(app)
 
 if (isDev) {
   // ??
@@ -61,6 +63,8 @@ if (isDev) {
   app.use(express.static(path.resolve(__dirname, '../dist')))
 } else {
   app.use(express.static(path.resolve(__dirname, '../dist')))
+
+  // routes every request to index file in dist folder
   app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, '../dist/index.html'))
     res.end()
