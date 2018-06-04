@@ -14,10 +14,10 @@ const store = configureStore()
 // this is where you retrieve data from local storage
 
 // TODO: reconfigure to only send token
-if (localStorage.appJWT) {
-  const payload = decode(localStorage.appJWT)
+if (localStorage.ers) {
+  const payload = decode(localStorage.ers)
   const user = {
-    token: localStorage.appJWT,
+    token: localStorage.ers,
     email: payload.email,
     username: payload.username,
     photo: payload.photo,

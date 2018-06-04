@@ -1,6 +1,9 @@
 import webpack from 'webpack'
 import path from 'path'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
+import ExtractTextPlugin from 'extract-text-webpack-plugin'
+
+const isProd = process.env.NODE_ENV === 'production'
 
 const config: webpack.Configuration = {
   entry: {
@@ -43,6 +46,22 @@ const config: webpack.Configuration = {
           'awesome-typescript-loader'
         ]
       },
+      {
+        test: /\.sass$/,
+        loader: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                sourceMap: true,
+                importLoaders: 1
+              }
+            },
+            'sass-loader'
+          ]
+        })
+      },
 
       // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
       { enforce: 'pre', test: /\.js$/, loader: 'source-map-loader' }
@@ -56,6 +75,9 @@ const config: webpack.Configuration = {
     new HtmlWebpackPlugin({
       template: './client/public/index.html',
       inject: 'body'
+    }),
+    new ExtractTextPlugin({
+      filename: 'css/style.css'
     })
   ],
 

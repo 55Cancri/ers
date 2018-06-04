@@ -1,0 +1,42 @@
+  
+.dropdown-menu
+  display: grid
+  justify-content: center
+  margin: 10px auto 0
+  background-color: $white
+  filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.2))
+
+.dropdown-toggle
+  display: flex
+  align-items: center
+  background: none
+  border: none
+  outline: none
+
+  > .image
+    height: 50px
+    width: 50px
+    margin: 0 10px
+    border-radius: 50%
+
+
+.dropdown-item
+  display: grid
+  width: 100%
+  padding: 10px 30px 10px 20px
+  text-align: left
+  border: none
+  background: none
+  white-space: nowrap
+
+  &:first-of-type
+    padding-top: 20px
+
+  &:last-of-type
+    padding-bottom: 20px
+  
+  &:hover
+    background: $lightgrey
+
+  .logout
+    margin: 0

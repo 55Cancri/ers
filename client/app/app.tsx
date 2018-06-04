@@ -42,6 +42,6 @@ fontawesome.library.add(
   faTrash
 )
 
-// import './styles/styles.sass'
+import './styles/styles.sass'
 
 render(<AppRouter />, document.getElementById('root'))

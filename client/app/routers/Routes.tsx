@@ -16,7 +16,6 @@ import NotFoundPage from '../components/NotFoundPage'
 
 export const history = createHistory()
 
-// no longer requires history object to be passed from hoc
 interface IPages {
   history?: any
 }

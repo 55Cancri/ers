@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export let getToken = () => {
   console.log('getting token...')
-  const token = localStorage.getItem('appJWT')
+  const token = localStorage.getItem('ers')
   //headers must be an object
   return { token }
 }

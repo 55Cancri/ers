@@ -5,9 +5,6 @@ export const SplashPage = () => (
   <div>
     <header>
       <nav className="splash-nav">
-        <Link to="#" className="hook item">
-          Pricing
-        </Link>
         <Link to="/login" className="item">
           Login
         </Link>
@@ -18,24 +15,25 @@ export const SplashPage = () => (
     </header>
     <main className="splash-body">
       <section className="block -top">
-        <h1 className="title">Take Control of Your Money</h1>
-        <p className="subtitle">Remove the guesswork from financial planning</p>
+        <h1 className="title">Typescript boilerplate</h1>
+        <p className="subtitle">Includes HMR</p>
         <Link to="/signup" className="cta">
-          Try for Free
+          React router too!
         </Link>
       </section>
       <section className="block -middle">
-        <h2 className="title">Proactively manage income and spending</h2>
+        <h2 className="title">More boilerplate</h2>
         <ul className="list">
-          <li>Create accounts that define where your money goes</li>
-          <li>assign accounts to a liercentage of your income</li>
-          <li>seperate income into accounts based on your percentage</li>
+          <li>Sass reloading</li>
+          <li>Typescript with react type checking</li>
+          <li>Webpack run start and webpack run build fully functional</li>
         </ul>
       </section>
       <section className="block -bottom">
-        <h2 className="title">Budget with friends and family</h2>
+        <h2 className="title">The end</h2>
         <p className="text">
-          Create shared accounts with others and budget together
+          Took something like a week and a friend from stackoverflow to get this
+          working!
         </p>
       </section>
     </main>

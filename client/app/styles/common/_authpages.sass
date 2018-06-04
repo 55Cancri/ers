@@ -1,0 +1,108 @@
+.overlay
+  position: absolute
+  top: 0
+  right: 0
+  bottom: 0
+  left: 0
+  opacity: .85
+  background-color: $want-green
+  z-index: -1
+
+.bg
+  position: absolute
+  top: 0
+  right: 0
+  bottom: 0
+  left: 0
+  background: url('https://res.cloudinary.com/project-phantom/image/upload/v1524399417/global/rawpixel-com-569616-unsplash-min-2.jpg')no-repeat left / cover
+  filter: hue-rotate(290deg)
+  z-index: -10
+
+.signup-page, .login-page
+  display: grid
+
+  .seam
+    font: normal $xl 'Salsa', sans-serif
+    justify-self: center
+    margin: 30px 0 0
+    padding: 0
+    color: $white
+
+
+.auth-form
+  display: grid
+  position: relative
+  grid-row-gap: 15px
+  width: 40vw
+  min-width: max-content
+  max-width: 700px
+  padding: 30px 75px
+  margin: 4vh auto
+  box-sizing: border-box
+  background-color: $white
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5))
+
+  > .errors-global
+    position: absolute
+    text-align: center
+    margin: 0
+    padding: 5px 0
+    width: 100%
+    color: $white
+    background-color: $delete-red-bg
+
+  > .header
+    margin: 20px 0 0
+    justify-self: center
+    color: $headergrey
+
+  > .input-group
+    box-sizing: border-box
+
+    > .title
+      text-transform: uppercase
+      letter-spacing: .8px
+      color: $titlegrey
+
+    > .inline-errors
+      position: absolute
+      top: 55px
+      right: 10px
+      font-style: italic
+      color: $delete-red-bg
+
+    input
+      padding: 5px 10px
+      border: none
+      color: $titlegrey
+      background-color: $lightgrey
+
+
+  .submit
+    padding: 6px 0
+    margin-top: 10px
+    border: none
+    color: $white
+    background-color: $want-green
+    transition: 300ms
+    &:hover
+      filter: brightness(90%)
+
+
+.other-page
+  display: flex
+
+  > .text
+    margin: 0
+    color: $grey
+
+  > .link
+    color: $need-blue-text
+    &:hover
+      text-decoration: underline
+      color: darken($need-blue-text, 5%)
+
+
+.signup-page
+
+.login-page
