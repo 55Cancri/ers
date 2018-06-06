@@ -14,17 +14,17 @@ const store = configureStore()
 // this is where you retrieve data from local storage
 
 // TODO: reconfigure to only send token
-if (localStorage.ers) {
-  const payload = decode(localStorage.ers)
-  const user = {
-    token: localStorage.ers,
-    email: payload.email,
-    username: payload.username,
-    photo: payload.photo,
-    confirmed: payload.confirmed
-  }
-  store.dispatch(login(user))
-}
+// if (localStorage.ers) {
+//   const payload = decode(localStorage.ers)
+//   const user = {
+//     token: localStorage.ers,
+//     email: payload.email,
+//     username: payload.username,
+//     photo: payload.photo,
+//     confirmed: payload.confirmed
+//   }
+//   store.dispatch(login(user))
+// }
 
 export class AppRouter extends Component {
   render() {

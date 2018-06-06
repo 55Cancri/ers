@@ -1,0 +1,41 @@
+.needs-modal
+  padding: 25px
+
+
+// form
+.needs-form
+  display: grid
+  
+  > .upload
+    justify-self: center
+    margin: 0 0 20px 0
+
+
+.needs-numerical-data
+  display: grid
+  grid-template-columns: repeat(2, 1fr)
+  grid-column-gap: 30px
+
+
+.needs-modal_buttons
+  display: grid
+  grid-template-columns: repeat(2, max-content)
+  grid-gap: 10px
+  justify-self: end
+
+  > .cancel
+    border: none
+    background: none
+    color: $grey
+    &:hover
+      transition: 300ms
+      filter: brightness(80%)
+
+  > .submit
+    padding: 5px 15px
+    border: none
+    color: $white
+    background: $need-blue-text
+    &:hover
+      transition: 300ms
+      filter: brightness(90%)

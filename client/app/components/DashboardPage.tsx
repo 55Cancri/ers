@@ -3,7 +3,8 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
 import numeral from 'numeral'
-import Header from './Header.jsx'
+import NavOptions from './NavOptions'
+// import Header from './Header.jsx'
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 import fontawesome from '@fortawesome/fontawesome'
 
@@ -16,6 +17,7 @@ class DashboardPage extends Component {
     return (
       <div>
         <h1>Dashboard</h1>
+        <NavOptions />
       </div>
     )
   }

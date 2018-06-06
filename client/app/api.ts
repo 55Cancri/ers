@@ -8,11 +8,12 @@ export let getToken = () => {
 }
 export default {
   user: {
-    login: credentials =>
-      axios.post('/api/login', { credentials }).then(res => res.data.user),
+    // createTable: () => axios.post('/create').then(res => console.log(res)),
 
-    signup: user =>
-      axios.post('/api/signup', { user }).then(res => res.data.user),
+    signup: dossier => axios.post('/signup', { dossier }).then(res => res.data),
+
+    login: credentials =>
+      axios.post('/login', { credentials }).then(res => res.data),
 
     updateGeneral: file =>
       axios

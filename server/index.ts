@@ -1,10 +1,9 @@
 import express from 'express'
 import { Request, Response, NextFunction } from 'express'
-import router from './routers/router'
 import bodyParser from 'body-parser'
 import path from 'path'
 import fs from 'fs'
-import * as movieDao from './dao/movie-dao'
+// import * as movieDao from './dao/movie-dao'
 
 // connect webpack to express server
 import webpack from 'webpack'
@@ -24,11 +23,11 @@ const port = parseInt(process.env.PORT) || 3222
 app.set('port', port)
 
 // setup middleware
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
 // setup routes
-// app.use('/', router)
-import Routes from './routers/router'
+import Routes from './routes'
 const routes = Routes(app)
 
 if (isDev) {

@@ -32,5 +32,6 @@ export const configureStore = () => {
     }),
     composeEnhancers(applyMiddleware(thunk, checkTokenExpirationMiddleware))
   )
+
   return store
 }

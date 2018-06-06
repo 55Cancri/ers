@@ -1,0 +1,39 @@
+.wants-modal
+  padding: 25px
+
+
+// form
+.wants-form
+  display: grid
+
+
+// percent and goal
+.wants-numerical-data
+  display: grid
+  grid-template-columns: max-content 1fr
+  grid-column-gap: 30px
+
+
+// buttons
+.wants-modal_buttons
+  display: grid
+  grid-template-columns: repeat(2, max-content)
+  grid-gap: 10px
+  justify-self: end
+
+  > .cancel
+    border: none
+    background: none
+    color: $grey
+    &:hover
+      transition: 300ms
+      filter: brightness(80%)
+
+  > .submit
+    padding: 5px 15px
+    border: none
+    color: $white
+    background: $want-green-text
+    &:hover
+      transition: 300ms
+      filter: brightness(95%)

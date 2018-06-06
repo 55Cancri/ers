@@ -12,6 +12,12 @@ export const startLogin = credentials => dispatch =>
     dispatch(login(user))
   })
 
+export const startSignup = dossier => dispatch =>
+  api.user.signup(dossier).then(user => {
+    localStorage.ers = user.token
+    dispatch(login(user))
+  })
+
 export const logout = () => ({
   type: 'LOGOUT'
 })
@@ -20,12 +26,6 @@ export const startLogout = () => dispatch => {
   localStorage.removeItem('ers')
   dispatch(logout())
 }
-
-export const startSignup = data => dispatch =>
-  api.user.signup(data).then(user => {
-    localStorage.ers = user.token
-    dispatch(login(user))
-  })
 
 export const updateGeneral = data => ({
   type: 'GENERAL',

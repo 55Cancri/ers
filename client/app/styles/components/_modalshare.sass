@@ -1,0 +1,65 @@
+.share-modal
+  display: grid
+  padding: 25px
+
+
+.share-modal_header
+  display: grid
+  grid-template-columns: 1fr
+  
+  .close
+    justify-self: end
+    color: $grey
+    &:hover
+      color: $darkgrey
+
+
+.share-form
+  display: grid
+
+  .input-group
+    display: grid
+    position: relative
+    width: 100%
+    margin: 20px 0 30px
+
+    p
+      margin: 0
+
+    > .email
+      height: 110px
+      width: 30vw
+      resize: none
+
+    > .annotation
+      justify-self: start
+      margin-top: 10px
+      font: italic 400 $s Amiko, Helvetica, sans-serif
+      color: darken($buttongrey, 5%)
+    
+
+  
+
+
+.share-modal_buttons
+  display: grid
+  grid-template-columns: repeat(2, max-content)
+  grid-gap: 10px
+  justify-self: end
+
+  > .cancel
+    border: none
+    background: none
+    color: $grey
+    &:hover
+      transition: 300ms
+      filter: brightness(80%)
+
+  > .submit
+    padding: 5px 15px 4px
+    border: none
+    color: $white
+    background: $need-blue-text
+    &:hover
+      transition: 300ms
+      filter: brightness(90%)

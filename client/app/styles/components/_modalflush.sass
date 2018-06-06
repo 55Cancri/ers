@@ -1,0 +1,59 @@
+.flush-modal
+  display: grid
+  padding: 25px
+
+
+.flush-modal_header
+  display: grid
+  grid-template-columns: 1fr
+  
+  .close
+    justify-self: end
+    color: $grey
+    &:hover
+      color: $darkgrey
+
+
+.flush-form
+  display: grid
+
+
+  .input-group
+    display: grid
+    position: relative
+    width: 100%
+    margin: 20px 0 30px
+
+    p
+      margin: 0
+    
+    .warning
+      margin-bottom: 10px
+      font-weight: 800
+    
+    .info
+      color: $grey
+
+
+.flush-modal_buttons
+  display: grid
+  grid-template-columns: repeat(2, max-content)
+  grid-gap: 10px
+  justify-self: end
+
+  > .cancel
+    border: none
+    background: none
+    color: $grey
+    &:hover
+      transition: 300ms
+      filter: brightness(80%)
+
+  > .submit
+    padding: 5px 25px 4px
+    border: none
+    color: $white
+    background: $delete-red-bg
+    &:hover
+      transition: 300ms
+      filter: brightness(90%)

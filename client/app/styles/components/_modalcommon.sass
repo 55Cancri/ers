@@ -1,0 +1,167 @@
+.remaining-points,
+.remaining-cash
+  margin: 10px 0 0
+  text-align: center
+
+
+
+.modal_header
+  display: grid
+  grid-template-columns: 1fr 1fr
+
+  .title
+    justify-self: start
+    margin: 0
+  
+  .close
+    justify-self: end
+    color: $grey
+    &:hover
+      color: $darkgrey
+
+
+.input-group
+  display: grid
+  position: relative
+  align-content: end
+  width: 100%
+  margin-top: 10px
+
+  // common
+  input, textarea, .input
+    padding: 5px 10px
+    border: none
+    color: $titlegrey
+    background-color: $lightgrey
+
+  > .title
+    justify-self: start
+    margin-bottom: 5px
+    text-transform: uppercase
+    letter-spacing: .8px
+    color: $titlegrey
+
+  > .percent
+    padding-left: 15px
+    width: 70px
+    -moz-appearance:textfield
+    &::-webkit-inner-spin-button, 
+    &::-webkit-outer-spin-button
+      -webkit-appearance: none
+      margin: 0
+
+  > .description
+    height: 100px
+    resize: none
+
+  > .percent-symbol
+    position: absolute
+    top: 35px
+    right: 25px
+
+  > .dollar-symbol
+    position: absolute
+    top: 35px
+    left: 10px
+
+  // wants
+  > .goal
+    padding-left: 25px
+
+  > .upload
+    justify-self: center
+    margin-bottom: 10px
+
+  // needs
+  > .method
+    height: 32px
+    border: 0
+    outline: 1px inset $lightgrey
+    outline-offset: -1px
+    background: none
+
+  > .payment
+    padding-left: 25px
+
+  > .upload
+    justify-self: center
+    margin-bottom: 10px
+    background: none
+
+  // transfer
+  > .transfer
+      padding-left: 25px
+
+  // distribute
+  > .distribute
+    padding-left: 25px
+
+  > .select
+    -webkit-appearance: none
+    -moz-appearance: none
+    appearance: none
+    box-sizing: content-box
+    padding: 5px 10px 2px
+    background: none
+    border: 2px solid $buttongrey
+    border-radius: 20px
+    font-size: $m
+    color: $grey
+    transition: 300ms all
+
+  > .icon
+    position: absolute
+    top: 40px
+    right: 20px
+    pointer-events: none
+    color: $buttongrey
+
+  > .purchase
+    padding: 8px 9px
+    height: 35px
+    // border: 1px solid red
+  
+  > .quantity
+    height: 35px
+
+  > .stats
+    position: relative
+    justify-self: center
+    align-self: center
+    margin-bottom: 15px
+    height: 100px
+    width: 100px
+    border-radius: 50%
+    background-color: $need-blue
+
+    > .title
+      position: absolute
+      top: 0%
+      width: 100%
+      color: $need-blue-text
+      font: 600 14px Amiko, Helvetica, sans-serif
+
+    > .text
+      position: absolute
+      width: 100%
+      margin: 0
+      padding: 5px 0 0
+      top: 24%
+      vertical-align: center
+      color: $off-white
+      font: 400 20px Amiko, Helvetica, sans-serif
+    
+    > .subtext
+      position: absolute
+      top: 58%
+      margin: 0
+      width: 100%
+      text-transform: uppercase
+      color: $need-blue-dark
+      font: 600 12px Amiko, Helvetica, sans-serif
+
+
+.center-group
+  justify-self: center
+  width: 75%
+  margin-top: 25px

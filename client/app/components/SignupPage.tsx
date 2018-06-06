@@ -20,8 +20,9 @@ interface ClassState {
 
 export class SignupPage extends Component<ClassProps, ClassState> {
   state = {
-    username: '',
     email: '',
+    fullname: '',
+    username: '',
     password: '',
     errors: {
       username: '',
@@ -41,11 +42,15 @@ export class SignupPage extends Component<ClassProps, ClassState> {
   // startSignup will also have dispatch with it
   onSubmit = e => {
     e.preventDefault()
+    const personName = this.state.fullname.split(' ')
     const data = {
-      username: this.state.username,
       email: this.state.email,
+      firstname: personName[0],
+      lastname: personName[personName.length - 1],
+      username: this.state.username,
       password: this.state.password
     }
+    console.log('here are your credentials: ', data)
 
     // passed down from connect
     this.props
@@ -53,7 +58,10 @@ export class SignupPage extends Component<ClassProps, ClassState> {
       .then(() => {
         this.props.history.push('/dashboard')
       })
-      .catch(err => this.setState({ errors: err.response.data.errors }))
+      .catch(err => {
+        console.log('well now we have a problem: ', err)
+        this.setState({ errors: err.response.data.errors })
+      })
   }
 
   render() {
@@ -61,7 +69,7 @@ export class SignupPage extends Component<ClassProps, ClassState> {
     return (
       <div className="signup-page">
         <Link to="/" className="seam">
-          Seam
+          Revature
         </Link>
         <form
           className="auth-form"
@@ -70,19 +78,25 @@ export class SignupPage extends Component<ClassProps, ClassState> {
         >
           <h2 className="header">Sign Up</h2>
           <div className="input-group">
-            <label htmlFor="username" className="title">
-              username
-            </label>
-            <input type="text" name="username" />
-          </div>
-          <div className="input-group">
             <label htmlFor="email" className="title">
               email
             </label>
             <input type="email" name="email" />
           </div>
           <div className="input-group">
-            <label htmlFor="email" className="title">
+            <label htmlFor="fullname" className="title">
+              full name
+            </label>
+            <input type="text" name="fullname" />
+          </div>
+          <div className="input-group">
+            <label htmlFor="username" className="title">
+              username
+            </label>
+            <input type="text" name="username" />
+          </div>
+          <div className="input-group">
+            <label htmlFor="password" className="title">
               password
             </label>
             <input type="password" name="password" />
@@ -99,7 +113,8 @@ export class SignupPage extends Component<ClassProps, ClassState> {
             </Link>
           </div>
         </form>
-        {errors.global && <p>{errors.global}</p>}
+        {!!errors.global && <p>{errors.global}</p>}
+        {/* {errors.global && <p>{errors.global}</p>} */}
         <div className="overlay" />
         <div className="bg" />
       </div>
@@ -107,4 +122,7 @@ export class SignupPage extends Component<ClassProps, ClassState> {
   }
 }
 
-export default connect(undefined, { startSignup })(SignupPage)
+export default connect(
+  undefined,
+  { startSignup }
+)(SignupPage)

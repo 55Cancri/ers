@@ -3,8 +3,10 @@ import { Link, RouteComponentProps } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { startLogin } from '../actions/auth'
 
+import api from '../api'
+
 interface IData {
-  email: string
+  username: string
   password: string
 }
 
@@ -15,10 +17,10 @@ interface IProps extends RouteComponentProps<any> {
 
 // define types of state
 interface IState {
-  email: string
+  username: string
   password: string
   errors: {
-    email: string
+    username: string
     password: string
     global?: string
   }
@@ -26,10 +28,10 @@ interface IState {
 // include both prop types and state types with class
 export class LoginPage extends Component<IProps, IState> {
   state = {
-    email: '',
+    username: '',
     password: '',
     errors: {
-      email: '',
+      username: '',
       password: '',
       global: ''
     }
@@ -40,36 +42,32 @@ export class LoginPage extends Component<IProps, IState> {
       [name]: value
     } as any)
   }
-  // onFieldChange = ({ target }) => {
-  //   let {
-  //     name,
-  //     value
-  //   }: { name: Exclude<keyof IState, 'errors'>; value: string } = target
-  //   this.setState({
-  //     [name]: value
-  //   })
-  //   // const x = { [name]: value }
-  //   // this.setState(x)
-  // }
+
+  create = e => {
+    e.preventDefault()
+    // api.user.createTable()
+  }
 
   onSubmit = e => {
     e.preventDefault()
     const data = {
-      email: this.state.email,
+      username: this.state.username,
       password: this.state.password
     }
 
-    if (this.state.email.length === 0) {
+    // check username is not blank
+    if (this.state.username.length === 0) {
       this.setState(prevState => ({
         errors: {
-          email: 'email field cannot be blank',
+          username: 'username field cannot be blank',
           password: prevState.errors.password
         }
       }))
-    } else if (this.state.email.length > 0) {
+      // ??
+    } else if (this.state.username.length > 0) {
       this.setState(prevState => ({
         errors: {
-          email: '',
+          username: '',
           password: prevState.errors.password
         }
       }))
@@ -84,24 +82,27 @@ export class LoginPage extends Component<IProps, IState> {
     //   }))
     // }
 
+    // check password is not blank
     if (this.state.password.length === 0) {
       console.log('set blank password')
       this.setState(prevState => ({
         errors: {
-          email: prevState.errors.email,
+          username: prevState.errors.username,
           password: 'password field cannot be blank'
         }
       }))
+      // ??
     } else if (this.state.password.length > 0) {
       this.setState(prevState => ({
         errors: {
-          email: prevState.errors.email,
+          username: prevState.errors.username,
           password: ''
         }
       }))
     }
 
-    if (this.state.email.length > 0 && this.state.password.length > 0) {
+    // if checks pass, send user data to the server
+    if (this.state.username.length > 0 && this.state.password.length > 0) {
       this.props
         .startLogin(data)
         .then(() => {
@@ -116,7 +117,7 @@ export class LoginPage extends Component<IProps, IState> {
     return (
       <div className="login-page">
         <Link to="/" className="seam">
-          Seam
+          Revature
         </Link>
         <form
           className="auth-form"
@@ -126,15 +127,17 @@ export class LoginPage extends Component<IProps, IState> {
           {errors.global && <p className="errors-global">{errors.global}</p>}
           <h2 className="header">Login</h2>
           <div className="input-group">
-            <label className="title">email</label>
+            <label className="title">username</label>
             <input
-              type="email"
-              name="email"
+              type="text"
+              name="username"
               style={{
-                border: !!errors.email ? '2px solid #e87c7c' : 'none'
+                border: !!errors.username ? '2px solid #e87c7c' : 'none'
               }}
             />
-            {errors.email && <p className="inline-errors">{errors.email}</p>}
+            {errors.username && (
+              <p className="inline-errors">{errors.username}</p>
+            )}
           </div>
           <div className="input-group">
             <label className="title">password</label>
@@ -168,4 +171,7 @@ export class LoginPage extends Component<IProps, IState> {
   }
 }
 
-export default connect(undefined, { startLogin })(LoginPage)
+export default connect(
+  undefined,
+  { startLogin }
+)(LoginPage)

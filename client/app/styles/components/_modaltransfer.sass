@@ -1,0 +1,62 @@
+.transfer-modal
+  padding: 25px
+
+.transfer-modal_header
+  display: grid
+  grid-template-columns: 1fr
+  
+  .close
+    justify-self: end
+    color: $grey
+    &:hover
+      color: $darkgrey
+
+// form
+.transfer-form
+  display: grid
+
+
+  > .annotation
+    display: inline-block
+    justify-self: center
+    margin-top: 10px
+    height: 40px
+    width: 275px
+    line-height: 1.7 !important
+    font: italic 400 $s Amiko, Helvetica, sans-serif
+    color: darken($buttongrey, 5%)
+
+// recipient
+.transfer-split-data
+  display: grid
+  grid-template-columns: 1fr 1fr
+  grid-column-gap: 30px
+  margin: 15px 0 25px
+
+// buttons
+.transfer-modal_buttons
+  display: grid
+  grid-template-columns: repeat(2, max-content)
+  grid-gap: 10px
+  justify-self: end
+  margin-top: 25px
+
+  > .cancel
+    border: none
+    background: none
+    color: $grey
+    &:hover
+      transition: 300ms
+      filter: brightness(80%)
+
+  > .submit
+    padding: 5px 15px
+    border: none
+    color: $white
+    background: $want-green-text
+    transition: 300ms all
+    &:hover
+      transition: 300ms
+      filter: brightness(95%)
+    &:disabled
+      background-color: $buttongrey
