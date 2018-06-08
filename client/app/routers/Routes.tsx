@@ -29,6 +29,45 @@ interface IState {
   sidebarOpen: boolean
 }
 
+// sidebar content
+const sidebar = <SidebarContent />
+
+const publicRoutes = (
+  <Switch>
+    <PublicRoute exact path="/" component={SignupPage} />
+    <PublicRoute path="/signup" component={SignupPage} />
+    <PublicRoute path="/login" component={LoginPage} />
+  </Switch>
+)
+
+const privateRoutes = (
+  <Switch>
+    <PrivateRoute path="/settings" component={SettingsPage} />
+    <PrivateRoute path="/dashboard" component={DashboardPage} />
+    <PrivateRoute path="/create" component={ReimbursePage} />
+  </Switch>
+)
+// const routes = (
+//   <Switch>
+//     <PublicRoute exact path="/" component={SignupPage} />
+//     <PublicRoute path="/signup" component={SignupPage} />
+//     <PublicRoute path="/login" component={LoginPage} />
+//     <Sidebar
+//       sidebar={sidebar}
+//       open={this.state.sidebarOpen}
+//       docked={this.state.sidebarDocked}
+//       onSetOpen={this.onSetSidebarOpen}
+//       transitions={false}
+//     >
+//       <PrivateRoute path="/settings" component={SettingsPage} />
+//       <PrivateRoute path="/dashboard" component={DashboardPage} />
+//       <PrivateRoute path="/create" component={ReimbursePage} />
+//     </Sidebar>
+
+//     <Route component={NotFoundPage} />
+//   </Switch>
+// )
+
 export class Pages extends Component<IProps, IState> {
   state = {
     mql: mql,
@@ -52,15 +91,12 @@ export class Pages extends Component<IProps, IState> {
     this.state.mql.removeListener(this.mediaQueryChanged)
   }
 
-  render() {
-    // sidebar content
-    const sidebar = <SidebarContent />
+  // @ts-ignore
+  render = () => {
     return (
       <Router history={history}>
         <Switch>
-          <PublicRoute exact path="/" component={SignupPage} />
-          <PublicRoute path="/signup" component={SignupPage} />
-          <PublicRoute path="/login" component={LoginPage} />
+          {publicRoutes}
           <Sidebar
             sidebar={sidebar}
             open={this.state.sidebarOpen}
@@ -68,12 +104,8 @@ export class Pages extends Component<IProps, IState> {
             onSetOpen={this.onSetSidebarOpen}
             transitions={false}
           >
-            <PrivateRoute path="/settings" component={SettingsPage} />
-            <PrivateRoute path="/dashboard" component={DashboardPage} />
-            <PrivateRoute path="/create" component={ReimbursePage} />
+            {privateRoutes}
           </Sidebar>
-
-          <Route component={NotFoundPage} />
         </Switch>
       </Router>
     )

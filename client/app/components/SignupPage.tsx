@@ -176,7 +176,7 @@ export class SignupPage extends Component<ClassProps, ClassState> {
           onChange={this.onFieldChange}
           onSubmit={this.onSubmit}
         >
-          <h2 className="header">Sign Up</h2>
+          <h2 className="header">Sign Out</h2>
           <div className="input-group">
             <label htmlFor="email" className="title">
               email
