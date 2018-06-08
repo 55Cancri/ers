@@ -56,6 +56,9 @@ if (isDev) {
       // bundled files will be available in browser on localhost:port
       publicPath: webpackConfig.output.publicPath,
 
+      // hmr
+      hot: true,
+
       // tells server where to serve content (static files) from
       // will current dir as base but can be changed
       contentBase: path.resolve(__dirname, '../client/public'),

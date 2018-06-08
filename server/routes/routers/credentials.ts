@@ -53,7 +53,7 @@ module.exports = app => {
         })
       })
       .catch(err => {
-        if (err.errors.global)
+        if (err.errors.global !== undefined)
           res.status(400).json({ errors: { global: 'invalid credentials' } })
       })
   })

@@ -215,8 +215,8 @@ export class SignupPage extends Component<ClassProps, ClassState> {
         </form>
         {!!errors.global && <p>{errors.global}</p>}
         {/* {errors.global && <p>{errors.global}</p>} */}
-        <div className="overlay" />
-        <div className="bg" />
+        <div className="signup-overlay" />
+        <div className="signup-bg" />
       </div>
     )
   }

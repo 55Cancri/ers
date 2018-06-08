@@ -58,7 +58,7 @@ export class Pages extends Component<IProps, IState> {
     return (
       <Router history={history}>
         <Switch>
-          <PublicRoute path="/" component={SignupPage} />
+          <PublicRoute exact path="/" component={SignupPage} />
           <PublicRoute path="/signup" component={SignupPage} />
           <PublicRoute path="/login" component={LoginPage} />
           <Sidebar
