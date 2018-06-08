@@ -1,17 +1,29 @@
 import React from 'react'
 
 // login user obj will be placed in auth because of auth reducer
-export const authReducer = (state = {}, action: any = {}) => {
+export const authorizationReducer = (state = {}, action: any = {}) => {
   switch (action.type) {
     case 'LOGIN':
       return {
-        token: action.user.token,
         username: action.user.username,
-        email: action.user.email,
-        role: action.user.role
-        // id: action.user.userId,
-        // photo: action.user.photo,
-        // confirmed: action.user.confirmed
+        token: action.user.token,
+        role: action.user.role,
+        email: action.user.email
+      }
+
+    case 'PERSIST':
+      return {
+        username: action.identity.username,
+        token: action.identity.token
+      }
+
+    case 'RESTORE':
+      console.log('restore attempt in auth redu..')
+      return {
+        username: action.user.username,
+        token: action.user.token,
+        role: action.user.role,
+        email: action.user.email
       }
 
     case 'LOGOUT':

@@ -3,6 +3,9 @@ import { Link, RouteComponentProps } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { startSignup } from '../actions/auth'
 
+// TODO: FINISH GTAV CHEAT CODE CHECK. IT ENABLES YOU TO CONTINUE ADDING
+// WRONG LETTERS ON I THINK > AND < CHARACTERS. MAYBE OTHERS...
+
 interface ClassProps extends RouteComponentProps<any> {
   startSignup(data: {}): any
 }
@@ -11,6 +14,8 @@ interface ClassState {
   username: string
   email: string
   password: string
+  cheat: any
+  admin: boolean
   errors: {
     username: string
     email: string
@@ -24,12 +29,107 @@ export class SignupPage extends Component<ClassProps, ClassState> {
     fullname: '',
     username: '',
     password: '',
+    cheat: [],
+    admin: false,
     errors: {
       username: '',
       email: '',
       password: '',
       global: ''
     }
+  }
+
+  promiseState = async state =>
+    new Promise(resolve => this.setState(state, resolve))
+
+  // promiseState({...})
+  //     .then(() => promiseState({...})
+  //     .then(() => {
+  //         ...  // other code
+  //         return promiseState({...});
+  //     })
+  //     .then(() => {...});
+
+  // accessibility
+  listenKeyboard = e => {
+    const code = ['>', 'a', '>', '<', '>', 'rb', '>', '<', 'a', 'y']
+    const { cheat: command } = this.state
+
+    // this.setState(prevState => ({ cheat: [...prevState.cheat, 'a'] }))
+    // console.log('check: ', this.state.cheat)
+    // console.log('your keycode, key, and value: ', e.keyCode, e.key, e.value)
+    switch (e.keyCode || e.key) {
+      case 37:
+        if (command[2] === '>' || command[6] === '>')
+          this.promiseState(prevState => ({
+            ...prevState,
+            cheat: [...prevState.cheat, '<']
+          })).then(() => test())
+        else this.promiseState({ cheat: [] })
+        break
+      case 39:
+        if (
+          command.length === 0 ||
+          command[1] === 'a' ||
+          command[3] === '<' ||
+          command[5] === 'rb'
+        )
+          this.promiseState(prevState => ({
+            ...prevState,
+            cheat: [...prevState.cheat, '>']
+          })).then(() => test())
+        else this.promiseState({ cheat: [] }).then(() => test())
+        break
+      case 9:
+      case 'Tab':
+        if (command[4] === '>')
+          this.promiseState(prevState => ({
+            ...prevState,
+            cheat: [...prevState.cheat, 'rb']
+          })).then(() => test())
+        else this.promiseState({ cheat: [] }).then(() => test())
+        break
+      case 65:
+      case 'a':
+        if (command[0] === '>' || command[7] === '<')
+          this.promiseState(prevState => ({
+            ...prevState,
+            cheat: [...prevState.cheat, 'a']
+          })).then(() => test())
+        else this.promiseState({ cheat: [] }).then(() => test())
+        break
+      case 89:
+      case 'y':
+        if (command[8] === 'a')
+          this.promiseState(prevState => ({
+            ...prevState,
+            cheat: [...prevState.cheat, 'y']
+          })).then(() => test())
+        else this.promiseState({ cheat: [] }).then(() => test())
+        break
+      default:
+        this.promiseState({ cheat: [] }).then(() => test())
+    }
+    if (this.state.cheat.length > 10) this.promiseState({ cheat: [] })
+    const test = () => {
+      if (this.state.cheat.join(',') === code.join(',')) {
+        this.promiseState({ admin: true })
+        window.removeEventListener('keydown', this.listenKeyboard, true)
+        alert('cheat code active')
+      }
+    }
+    // if (e.key === 'Escape' || e.keyCode === 27) {
+    //   this.props.onClose()
+    // }
+  }
+
+  componentDidMount() {
+    window.addEventListener('keydown', this.listenKeyboard, true)
+  }
+
+  // prevent memory leaks
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.listenKeyboard, true)
   }
 
   onFieldChange = ({ target }) => {

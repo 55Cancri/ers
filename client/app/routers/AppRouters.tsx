@@ -6,28 +6,28 @@ import decode from 'jwt-decode'
 
 import { Pages } from './Routes'
 
-import { login } from '../actions/auth'
+import { startPersist } from '../actions/auth'
 import { configureStore } from '../store/configureStore'
 
 const store = configureStore()
 
-// this is where you retrieve data from local storage
+interface IPayload {
+  username: string
+}
 
-// TODO: reconfigure to only send token
-// if (localStorage.ers) {
-//   const payload = decode(localStorage.ers)
-//   const user = {
-//     token: localStorage.ers,
-//     email: payload.email,
-//     username: payload.username,
-//     photo: payload.photo,
-//     confirmed: payload.confirmed
-//   }
-//   store.dispatch(login(user))
-// }
+if (localStorage.ers) {
+  const payload: IPayload = decode(localStorage.ers)
+  const user = {
+    username: payload.username,
+    token: localStorage.ers
+  }
+  // @ts-ignore
+  store.dispatch(startPersist(user))
+}
 
 export class AppRouter extends Component {
-  render() {
+  // @ts-ignore
+  render = () => {
     return (
       <Provider store={store}>
         <Pages />

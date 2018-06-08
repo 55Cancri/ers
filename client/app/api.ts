@@ -15,6 +15,14 @@ export default {
     login: credentials =>
       axios.post('/login', { credentials }).then(res => res.data),
 
+    persistUser: identity =>
+      axios
+        .post('/persist', { identity }, { headers: getToken() })
+        .then(res => res.data),
+
+    submitReimbursement: data =>
+      axios.post('/request', { data }).then(res => res.data),
+
     updateGeneral: file =>
       axios
         .post('/api/general_settings', file, { headers: getToken() })

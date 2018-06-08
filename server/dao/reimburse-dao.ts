@@ -20,6 +20,41 @@ const dynamodb = new aws.DynamoDB()
 // subset of functionality such as updates and deletes
 const docClient = new aws.DynamoDB.DocumentClient()
 
+const base = {
+  TableName: 'reimbursements'
+}
+
+export const create = (request): Promise<any> => {
+  // request new reimbursement
+  const reimbursement = {
+    ...request,
+    approver: 'n/a',
+    status: 'pending',
+    timeSubmitted: new Date()
+  }
+
+  const params = {
+    ...base,
+    Item: reimbursement
+  }
+  return docClient.put(params).promise()
+}
+
+// search reimbursements by user and most recent submission
+export const getData = username => {
+  const params = {
+    ...base,
+    KeyConditionExpression: '#title = :username',
+    ExpressionAttributeNames: {
+      '#title': 'username'
+    },
+    ExpressionAttributeValues: {
+      ':username': username
+    }
+  }
+  return docClient.query(params).promise()
+}
+
 // export const saveMovie = (movie): Promise<any> =>
 //   // put creates new item or replaces old item with new item
 //   docClient

@@ -2,8 +2,7 @@ import express from 'express'
 import { Request, Response, NextFunction } from 'express'
 import * as userService from '../../services/user-service'
 import * as reimburseService from '../../services/reimburse-service'
-
-// export const router = express.Router()
+import { verifyToken } from '../../utils/verifyToken'
 
 module.exports = app => {
   app.post('/signup', (req, res, next) => {
@@ -17,14 +16,48 @@ module.exports = app => {
   })
 
   app.post('/login', (req, res, next) => {
+    console.log('hit login route')
     userService
       .login(req.body.credentials)
-      .then(data => res.json(data))
+      .then(dossier => {
+        console.log('dossier: ', dossier)
+        reimburseService.retrieve(dossier.username).then(query => {
+          let user = {
+            ...dossier,
+            reimbursements: [...query.Items]
+          }
+
+          console.log('user: ', user)
+          res.json(user)
+        })
+      })
       .catch(err => {
         if (err.errors.global)
           res.status(400).json({ errors: { global: 'invalid credentials' } })
       })
   })
+
+  app.post('/persist', verifyToken, (req, res, next) => {
+    const { identity } = req.body
+    userService
+      .getUser(identity.username)
+      .then(dossier => {
+        const normalizedDossier = dossier.Items[0]
+        reimburseService.retrieve(normalizedDossier.username).then(query => {
+          let user = {
+            ...normalizedDossier,
+            token: req.headers.token,
+            reimbursements: [...query.Items]
+          }
+          res.json(user)
+        })
+      })
+      .catch(err => {
+        if (err.errors.global)
+          res.status(400).json({ errors: { global: 'invalid credentials' } })
+      })
+  })
+
   // movieService
   //   .findByYearAndTitle(parseInt(req.params.year), req.params.title)
   //   .then(data => res.json(data.Item))

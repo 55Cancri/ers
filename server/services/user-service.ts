@@ -10,28 +10,30 @@ export const signup = dossier => {
       // reject promise and send to clearance variable
       return Promise.reject({ errors: { global: 'user already exists!' } })
     }
-    // if user does not, add to db, then verify by finding them
+    // if user does not exist, add to db, then verify by finding them
     if (data.Items.length === 0) {
+      // create variable that will store promise result of signup -> findOne(user + token)
       const createThenVerify = userDao.signup(dossier).then(() =>
         userDao.findOne(dossier.username).then(data => {
+          // normalize nested result from db query
           const user = data.Items[0]
 
           // create and add token to user object
           const token = jwt.sign(
             { username: user.username },
-            process.env.TOKEN_KEY
+            process.env.JWT_SECRET
           )
           user['token'] = token
-          console.log('user: ', user)
+
+          // return user object in promise chain to createThenVerify variable
           return user
         })
       )
-      console.log('var: ', createThenVerify)
-      // return recovered user object to parent scope (clearance)
+      // return user object (now in createThenVerify) to parent scope
       return createThenVerify
     }
   })
-  // return user object object to function scope for promise chain (signup)
+  // return user object (now in clearance) to function scope to pass along promise chain
   return clearance
 }
 
@@ -43,8 +45,10 @@ export const login = credentials => {
     const user = data.Items[0]
 
     // create and add token to user object
-    const token = jwt.sign({ username: user.username }, process.env.TOKEN_KEY)
-    user['token'] = token
+    const token = user
+      ? jwt.sign({ username: user.username }, process.env.JWT_SECRET)
+      : null
+    user ? (user['token'] = token) : null
 
     if (data.Items.length === 1) {
       if (bcrypt.compareSync(password, user.password)) proceed = true
@@ -55,6 +59,9 @@ export const login = credentials => {
   })
   return clearance
 }
+
+export const getUser = username =>
+  userDao.findOne(username).then(dossier => dossier)
 
 // export const findAllByYear = (year: number) => movieDao.findAllByYear(year)
 

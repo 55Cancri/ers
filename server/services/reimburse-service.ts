@@ -1,4 +1,23 @@
 import * as reimburseDao from '../dao/reimburse-dao'
+import * as userDao from '../dao/user-dao'
+
+export const create = request => {
+  const { username } = request
+  const reimbursements = reimburseDao.create(request).then(data => {
+    reimburseDao.getData(username).then(data => {
+      console.log('reimbursement data: ', data)
+      // normalize nested result from db query
+      const reimbursement = data.Items[0]
+
+      // return reimbursement to promise chain
+      return reimbursement
+    })
+  })
+  // return reimbursements variable to function scope and continue promise chain
+  return reimbursements
+}
+
+export const retrieve = username => reimburseDao.getData(username)
 
 // export const createTable = () => reimburseDao.createReimburseTable()
 // export const findAllByYear = (year: number) => movieDao.findAllByYear(year)

@@ -3,6 +3,7 @@ import { Route, Redirect, RouteComponentProps } from 'react-router-dom'
 import { connect } from 'react-redux'
 import * as H from 'history'
 import Header from '../components/Header'
+import { startPersist } from '../actions/auth'
 
 interface RouteProps {
   location?: H.Location
@@ -25,6 +26,8 @@ interface RouteProps {
 
 interface StateProps {
   isAuthenticated?: boolean
+  reimbursements: any
+  identity: any
 }
 
 interface DispatchProps {
@@ -34,7 +37,8 @@ interface DispatchProps {
 type Props = StateProps & DispatchProps & RouteProps
 
 class PrivateRoute extends Component<Props> {
-  render() {
+  // @ts-ignore
+  render = () => {
     const { isAuthenticated, component: Component, ...rest } = this.props
 
     return (
@@ -56,8 +60,10 @@ class PrivateRoute extends Component<Props> {
 }
 
 const mapStateToProps = state => ({
+  email: state.auth.email,
   isAuthenticated: !!state.auth.token,
-  email: state.auth.email
+  reimbursements: state.reimbursements,
+  identity: state.auth
 })
 
 export default connect<StateProps, DispatchProps, RouteProps>(

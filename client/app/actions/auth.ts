@@ -6,6 +6,25 @@ export const login = user => ({
   user
 })
 
+export const persist = identity => ({
+  type: 'PERSIST',
+  identity
+})
+
+export const startPersist = identity => {
+  console.log('1. starting persist with ', identity)
+  return dispatch => {
+    console.log('2. dispatching persist for survival')
+    dispatch(persist(identity))
+
+    return api.user.persistUser(identity).then(user => {
+      console.log('startPersist: returned data — ', user)
+      console.log('3. dispatching login for all data')
+      return dispatch(login(user))
+    })
+  }
+}
+
 export const startLogin = credentials => dispatch =>
   api.user.login(credentials).then(user => {
     localStorage.ers = user.token

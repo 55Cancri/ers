@@ -5,23 +5,18 @@ interface IAction {
   payload?: any
 }
 
-const initialState = {
-  // oldPoints: 100,
-  // newPoints: 100,
-  // oldUndistributedCash: 0,
-  // newUndistributedCash: 0,
-  // available: 4
-}
+const initialState = {}
 
-export const appReducer = (state = initialState, action: any = {}) => {
+export const miscellaneousReducer = (
+  state = initialState,
+  action: any = {}
+) => {
   switch (action.type) {
-    case 'DIVVY':
+    case 'REQUEST':
+      console.log('now in reducer after db submit')
       return {
-        ...state
-        // oldPoints: state.newPoints,
-        // newPoints: action.user.points,
-        // oldUndistributedCash: state.newUndistributedCash,
-        // newUndistributedCash: action.user.undistributedCash
+        ...state,
+        reimbursements: action.reimbursements
       }
 
     case 'DISTRIBUTE':

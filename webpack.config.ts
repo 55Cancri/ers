@@ -1,7 +1,8 @@
 import webpack from 'webpack'
 import path from 'path'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
-import ExtractTextPlugin from 'extract-text-webpack-plugin'
+// import ExtractTextPlugin from 'extract-text-webpack-plugin'
+import MiniCSSExtractPlugin from 'mini-css-extract-plugin'
 
 const isProd = process.env.NODE_ENV === 'production'
 
@@ -18,6 +19,7 @@ const config: webpack.Configuration = {
   },
 
   // Enable sourcemaps for debugging webpack's output.
+  // devtool: 'cheap-module-eval-source-map',
   devtool: 'cheap-module-source-map',
 
   mode: 'development',
@@ -35,6 +37,7 @@ const config: webpack.Configuration = {
       // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
       {
         test: /\.tsx?$/,
+        // provide array of loaders
         use: [
           {
             loader: 'babel-loader',
@@ -47,20 +50,32 @@ const config: webpack.Configuration = {
         ]
       },
       {
-        test: /\.sass$/,
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            {
-              loader: 'css-loader',
-              options: {
-                sourceMap: true,
-                importLoaders: 1
-              }
-            },
-            'sass-loader'
-          ]
-        })
+        test: /\.(sa|c)ss$/,
+        // fallback: 'style-loader',
+        use: [
+          MiniCSSExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true,
+              importLoaders: 1
+            }
+          },
+          'sass-loader'
+        ]
+        // loader: ExtractTextPlugin.extract({
+        //   fallback: 'style-loader',
+        //   use: [
+        //     {
+        //       loader: 'css-loader',
+        //       options: {
+        //         sourceMap: true,
+        //         importLoaders: 1
+        //       }
+        //     },
+        //     'sass-loader'
+        //   ]
+        // })
       },
 
       // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
@@ -76,9 +91,12 @@ const config: webpack.Configuration = {
       template: './client/public/index.html',
       inject: 'body'
     }),
-    new ExtractTextPlugin({
+    new MiniCSSExtractPlugin({
       filename: 'css/style.css'
     })
+    // new ExtractTextPlugin({
+    //   filename: 'css/style.css'
+    // })
   ],
 
   devServer: {
