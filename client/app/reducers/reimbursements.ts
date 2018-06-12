@@ -14,6 +14,11 @@ export const reimburseReducer = (state = {}, action: any = {}) => {
         reimbursements: action.user.reimbursements
       }
 
+    // case 'SUBMIT':
+    //   return {
+    //     reimbursements: action.user.reimbursements
+    //   }
+
     default:
       return state
   }

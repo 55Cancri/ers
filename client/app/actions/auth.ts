@@ -1,10 +1,12 @@
 import React from 'react'
 import api from '../api'
 
-export const login = user => ({
-  type: 'LOGIN',
-  user
-})
+export const login = user => {
+  return {
+    type: 'LOGIN',
+    user
+  }
+}
 
 export const persist = identity => ({
   type: 'PERSIST',
@@ -12,14 +14,10 @@ export const persist = identity => ({
 })
 
 export const startPersist = identity => {
-  console.log('1. starting persist with ', identity)
   return dispatch => {
-    console.log('2. dispatching persist for survival')
     dispatch(persist(identity))
 
     return api.user.persistUser(identity).then(user => {
-      console.log('startPersist: returned data — ', user)
-      console.log('3. dispatching login for all data')
       return dispatch(login(user))
     })
   }
@@ -28,7 +26,11 @@ export const startPersist = identity => {
 export const startLogin = credentials => dispatch =>
   api.user.login(credentials).then(user => {
     localStorage.ers = user.token
-    dispatch(login(user))
+    // dispatch(login(user))
+    dispatch({
+      type: 'LOGIN',
+      user
+    })
   })
 
 export const startSignup = dossier => dispatch =>

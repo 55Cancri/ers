@@ -167,41 +167,43 @@ export class SignupPage extends Component<ClassProps, ClassState> {
   render() {
     const { errors } = this.state
     return (
+
       <div className="signup-page">
-        <Link to="/" className="seam">
-          Revature
-        </Link>
         <form
-          className="auth-form"
+          autoComplete="off"
+          className="form"
           onChange={this.onFieldChange}
           onSubmit={this.onSubmit}
         >
-          <h2 className="header">Sign Out</h2>
-          <div className="input-group">
+          <div className="form-group">
             <label htmlFor="email" className="title">
               email
             </label>
             <input type="email" name="email" />
           </div>
-          <div className="input-group">
+          <div className="form-group">
             <label htmlFor="fullname" className="title">
               full name
             </label>
             <input type="text" name="fullname" />
           </div>
-          <div className="input-group">
+          <div className="form-group">
             <label htmlFor="username" className="title">
               username
             </label>
             <input type="text" name="username" />
           </div>
-          <div className="input-group">
+          <div className="form-group">
             <label htmlFor="password" className="title">
               password
             </label>
-            <input type="password" name="password" />
+            <input
+              type="password"
+              name="password"
+              autoComplete="new-password"
+            />
           </div>
-          <div className="input-group">
+          <div className="form-group">
             <button type="submit" className="submit">
               Signup
             </button>

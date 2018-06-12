@@ -62,6 +62,26 @@ export const signup = (credentials): Promise<any> => {
   return docClient.put(params).promise()
 }
 
+/* 
+  Table: 'table name',
+  Item: your data
+*/
+
+// dynamodb table
+// { username, password }
+
+// userData = { username: 'bino', password: 'philip' }
+export const signUp = (userData): Promise<any> => {
+  // convert to dynamodb readable
+  const data = {
+    TableName: 'users',
+    Item: userData
+  }
+
+  // return object { table, item }
+  return docClient.put(data).promise()
+}
+
 // export const saveMovie = (movie): Promise<any> =>
 //   // put creates new item or replaces old item with new item
 //   docClient

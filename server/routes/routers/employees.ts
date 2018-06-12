@@ -2,10 +2,11 @@ import express from 'express'
 import * as reimburseService from '../../services/reimburse-service'
 
 module.exports = app => {
-  app.post('/request', (req, res, next) => {
-    console.log('reimbursement', req.body.reimbursement)
+  app.post('/submit', (req, res) => {
+    console.log('submitting...', req.body.reimbursement)
+    // {items[], username, role}
     reimburseService
-      .create(req.body.reimbursement)
+      .submit(req.body.reimbursement)
       .then(data => res.json(data))
       .catch(err => {
         if (err.errors.global)

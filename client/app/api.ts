@@ -20,8 +20,12 @@ export default {
         .post('/persist', { identity }, { headers: getToken() })
         .then(res => res.data),
 
-    submitReimbursement: data =>
-      axios.post('/request', { data }).then(res => res.data),
+    submitReimbursement: reimbursement => {
+      console.log("cause I'm for..gotten...")
+      return axios
+        .post('/submit', { reimbursement }, { headers: getToken() })
+        .then(res => res.data)
+    },
 
     updateGeneral: file =>
       axios

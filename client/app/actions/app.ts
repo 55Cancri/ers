@@ -18,13 +18,25 @@ export const startSetUser = email => dispatch => {
   })
 }
 
-export const submitRequest = request => ({
-  type: 'REQUEST',
-  request
+// export const submitRequest = request => ({
+//   type: 'REQUEST',
+//   request
+// })
+
+// export const startSubmitRequest = reimbursement => dispatch =>
+//   api.user
+//     .submitReimbursement(reimbursement)
+//     .then(data => dispatch(reimbursement))
+
+export const submitReimbursement = data => ({
+  type: 'SUBMIT',
+  data
 })
 
-export const startSubmitRequest = request => dispatch =>
-  api.user.submitReimbursement(request).then(data => dispatch(submitRequest))
+export const startSubmitReimbursement = data => dispatch =>
+  api.user
+    .submitReimbursement(data)
+    .then(user => dispatch(submitReimbursement(user)))
 
 export const deleteAccount = user => ({
   type: 'DELETE',

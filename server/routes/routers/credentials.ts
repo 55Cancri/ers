@@ -1,5 +1,6 @@
 import express from 'express'
 import { Request, Response, NextFunction } from 'express'
+
 import * as userService from '../../services/user-service'
 import * as reimburseService from '../../services/reimburse-service'
 import { verifyToken } from '../../utils/verifyToken'
@@ -15,6 +16,8 @@ module.exports = app => {
       })
   })
 
+  // user
+
   app.post('/login', (req, res, next) => {
     console.log('hit login route')
     userService
@@ -26,7 +29,6 @@ module.exports = app => {
             ...dossier,
             reimbursements: [...query.Items]
           }
-
           console.log('user: ', user)
           res.json(user)
         })

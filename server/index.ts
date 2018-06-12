@@ -7,10 +7,15 @@ import fs from 'fs'
 
 // connect webpack to express server
 import webpack from 'webpack'
+// webpack configuration file
 import webpackConfig from '../webpack.config'
+
 import webpackDevServer from 'webpack-dev-server'
+// webpack server
 import webpackDevMiddleware from 'webpack-dev-middleware'
+// updates components in real-time
 import webpackHotMiddleware from 'webpack-hot-middleware'
+// provides history object to go to different routes in react router
 import historyApiFallback from 'connect-history-api-fallback'
 
 const app = express()
@@ -76,10 +81,10 @@ if (isDev) {
         // would display built modules info
         modules: false
       }
-    })
+    } as any)
   )
 
-  // force webpackhot to use webpack config
+  // force webpackhot to use webpack config file
   app.use(webpackHotMiddleware(compiler))
 
   // ?

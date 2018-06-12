@@ -13,7 +13,7 @@ export const ReimbursementList: SFC<{
   return reimbursements.length === 0 ? (
     <div>You have not created any reimbursements yet</div>
   ) : (
-    reimbursements.map(record => <p>{record}</p>)
+    reimbursements.map(record => <p>{record.status}</p>)
   )
 }
 

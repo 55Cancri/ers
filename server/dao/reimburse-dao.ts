@@ -24,19 +24,21 @@ const base = {
   TableName: 'reimbursements'
 }
 
-export const create = (request): Promise<any> => {
+export const submit = (request): Promise<any> => {
+  console.log('now in submit doa')
   // request new reimbursement
   const reimbursement = {
     ...request,
     approver: 'n/a',
     status: 'pending',
-    timeSubmitted: new Date()
+    timeSubmitted: new Date().getTime().toString()
   }
 
   const params = {
     ...base,
     Item: reimbursement
   }
+  console.log('params object: ', params)
   return docClient.put(params).promise()
 }
 

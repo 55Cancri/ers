@@ -92,10 +92,31 @@ export class Pages extends Component<IProps, IState> {
   }
 
   // @ts-ignore
+  shouldComponentUpdate = () => false
+
+  // @ts-ignore
   render = () => {
     return (
       <Router history={history}>
         <Switch>
+          <PublicRoute exact path="/" component={SignupPage} />
+          <PublicRoute path="/signup" component={SignupPage} />
+          <PublicRoute path="/login" component={LoginPage} />
+          <Sidebar
+            sidebar={sidebar}
+            open={this.state.sidebarOpen}
+            docked={this.state.sidebarDocked}
+            onSetOpen={this.onSetSidebarOpen}
+            transitions={false}
+          >
+            <PrivateRoute path="/settings" component={SettingsPage} />
+            <PrivateRoute path="/dashboard" component={DashboardPage} />
+            <PrivateRoute path="/create" component={ReimbursePage} />
+          </Sidebar>
+
+          <Route component={NotFoundPage} />
+        </Switch>
+        {/* <Switch>
           {publicRoutes}
           <Sidebar
             sidebar={sidebar}
@@ -106,7 +127,7 @@ export class Pages extends Component<IProps, IState> {
           >
             {privateRoutes}
           </Sidebar>
-        </Switch>
+        </Switch> */}
       </Router>
     )
   }

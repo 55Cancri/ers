@@ -30,7 +30,7 @@ class DashboardPage extends Component<IProps> {
   makeAsync = async func =>
     new Promise(resolve => func(resolve).then(() => resolve()))
 
-  startReimbursement = () => this.props.history.push('/edit')
+  startReimbursement = () => this.props.history.push('/create')
 
   // @ts-ignore
   render = () => {

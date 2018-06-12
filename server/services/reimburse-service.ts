@@ -1,9 +1,10 @@
 import * as reimburseDao from '../dao/reimburse-dao'
 import * as userDao from '../dao/user-dao'
 
-export const create = request => {
-  const { username } = request
-  const reimbursements = reimburseDao.create(request).then(data => {
+export const submit = ticket => {
+  // ticket = {items[], username, role}
+  const { username } = ticket
+  const reimbursements = reimburseDao.submit(ticket).then(data => {
     reimburseDao.getData(username).then(data => {
       console.log('reimbursement data: ', data)
       // normalize nested result from db query
