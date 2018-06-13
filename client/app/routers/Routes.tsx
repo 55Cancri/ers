@@ -109,25 +109,13 @@ export class Pages extends Component<IProps, IState> {
             onSetOpen={this.onSetSidebarOpen}
             transitions={false}
           >
-            <PrivateRoute path="/settings" component={SettingsPage} />
-            <PrivateRoute path="/dashboard" component={DashboardPage} />
             <PrivateRoute path="/create" component={ReimbursePage} />
+            <PrivateRoute path="/dashboard" component={DashboardPage} />
+            <PrivateRoute path="/settings" component={SettingsPage} />
           </Sidebar>
 
           <Route component={NotFoundPage} />
         </Switch>
-        {/* <Switch>
-          {publicRoutes}
-          <Sidebar
-            sidebar={sidebar}
-            open={this.state.sidebarOpen}
-            docked={this.state.sidebarDocked}
-            onSetOpen={this.onSetSidebarOpen}
-            transitions={false}
-          >
-            {privateRoutes}
-          </Sidebar>
-        </Switch> */}
       </Router>
     )
   }

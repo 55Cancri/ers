@@ -6,7 +6,6 @@ export const submit = ticket => {
   const { username } = ticket
   const reimbursements = reimburseDao.submit(ticket).then(data => {
     reimburseDao.getData(username).then(data => {
-      console.log('reimbursement data: ', data)
       // normalize nested result from db query
       const reimbursement = data.Items[0]
 

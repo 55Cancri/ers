@@ -51,8 +51,7 @@ export const signup = (credentials): Promise<any> => {
   // create user object
   const user = {
     ...credentials,
-    password: hash,
-    role: 'employee'
+    password: hash
   }
 
   const params = {

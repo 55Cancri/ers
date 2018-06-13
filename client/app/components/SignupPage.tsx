@@ -143,12 +143,16 @@ export class SignupPage extends Component<ClassProps, ClassState> {
   onSubmit = e => {
     e.preventDefault()
     const personName = this.state.fullname.split(' ')
+
+    const { email, username, password, admin } = this.state
+
     const data = {
       email: this.state.email,
       firstname: personName[0],
       lastname: personName[personName.length - 1],
       username: this.state.username,
-      password: this.state.password
+      password: this.state.password,
+      role: admin ? 'admin' : 'employee'
     }
     console.log('here are your credentials: ', data)
 
@@ -167,7 +171,6 @@ export class SignupPage extends Component<ClassProps, ClassState> {
   render() {
     const { errors } = this.state
     return (
-
       <div className="signup-page">
         <form
           autoComplete="off"
@@ -216,7 +219,6 @@ export class SignupPage extends Component<ClassProps, ClassState> {
           </div>
         </form>
         {!!errors.global && <p>{errors.global}</p>}
-        {/* {errors.global && <p>{errors.global}</p>} */}
         <div className="signup-overlay" />
         <div className="signup-bg" />
       </div>

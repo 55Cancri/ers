@@ -1,34 +1,34 @@
-import React, { SFC } from 'react'
+import React from 'react'
 
-export const ReimbursementList: SFC<{
-  reimbursements: any
-}> = props => {
-  const { reimbursements } = props
-  if (reimbursements.length === 0)
-    return <div>You have not created any reimbursements yet</div>
-
-  return (
+export const AdminReimbursementList = props => (
+  <div>
+    <div>
+      <button>Approve</button>
+      <button>Deny</button>
+    </div>
     <table cellSpacing="0" className="reimburse-table">
       <tbody>
         <tr className="reimburse-headers">
+          <th />
           <th>Username</th>
           <th>Total</th>
-
           <th>Status</th>
           <th>Time Submitted</th>
         </tr>
-        {reimbursements.map(record => {
-          const dayOf = new Date(parseInt(record.timeSubmitted))
-
+        {props.everyReimbursement.map(reim => {
+          const dayOf = new Date(parseInt(reim.timeSubmitted))
           return (
-            <tr key={record.timeSubmitted} className="reimburse-row">
-              <td>{record.username}</td>
+            <tr key={reim.timeSubmitted} className="reimburse-row">
               <td>
-                {record.items
+                <input type="checkbox" />
+              </td>
+              <td>{reim.username}</td>
+              <td>
+                {reim.items
                   .map(item => parseInt(item.amount))
                   .reduce((total, item) => total + item)}
               </td>
-              <td>{record.status}</td>
+              <td>{reim.status}</td>
               <td>
                 {dayOf.getMonth() +
                   1 +
@@ -42,7 +42,7 @@ export const ReimbursementList: SFC<{
         })}
       </tbody>
     </table>
-  )
-}
+  </div>
+)
 
-export default ReimbursementList
+export default AdminReimbursementList

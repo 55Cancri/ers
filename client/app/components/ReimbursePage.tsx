@@ -1,47 +1,25 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { RouteProps, withRouter } from 'react-router'
 
 import ReimburseForm from './reimbursement/ReimburseForm'
 
-export class ReimbursePage extends Component {
-  state = {
-    items: [
-      {
-        id: '',
-        title: '',
-        type: 'travel',
-        amount: 0,
-        description: '',
-        receipts: '',
-        timeOfExpense: 0
-      }
-    ]
-  }
-
-  // onInputChange = ({ target }) => {
-  //   console.log('hey you hit me!', target.value)
-  //   const { name, value } = target
-  //   this.setState({
-  //     [name]: value
-  //   } as any)
-  // }
-
-  onSubmit = () => {
-    console.log('submitting data...')
-  }
-
+// need to pass history object to child components
+// has history object by virtue of being connected to redux
+export class ReimbursePage extends Component<any> {
   // @ts-ignore
   render = () => {
     return (
       <div>
         <h1>New reimbursement</h1>
-        <ReimburseForm
-        // handleItemChange={this.handleItemChange}
-        // state={this.state.items}
-        // setIdState={this.setIdState}
-        />
+        <ReimburseForm history={this.props.history} />
       </div>
     )
   }
 }
 
-export default ReimbursePage
+const mapStateToProps = state => ({
+  username: state.auth.username
+})
+
+export default connect(mapStateToProps)(ReimbursePage)

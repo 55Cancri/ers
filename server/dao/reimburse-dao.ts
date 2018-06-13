@@ -57,6 +57,22 @@ export const getData = username => {
   return docClient.query(params).promise()
 }
 
+// search reimbursements by user and most recent submission
+export const getDataByIndex = index => {
+  const params = {
+    ...base,
+    IndexName: 'status-index',
+    KeyConditionExpression: '#statusTitle = :statusValue',
+    ExpressionAttributeNames: {
+      '#statusTitle': 'status'
+    },
+    ExpressionAttributeValues: {
+      ':statusValue': index
+    }
+  }
+  return docClient.query(params).promise()
+}
+
 // export const saveMovie = (movie): Promise<any> =>
 //   // put creates new item or replaces old item with new item
 //   docClient

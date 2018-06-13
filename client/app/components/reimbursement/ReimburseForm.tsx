@@ -1,13 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { RouteProps } from 'react-router'
+// import { RouteComponentProps } from 'react-router-dom'
 import ReimburseItem from './ReimburseItem'
 import { generateUuid } from '../../helpers/helpers'
 import { startSubmitReimbursement } from '../../actions/app'
 
-interface IProps {
-  username: string
+interface IProps extends RouteProps {
   role: string
+  username: string
   startSubmitReimbursement?: any
+  history?: any
 }
 
 export class ReimburseForm extends Component<IProps> {
@@ -39,13 +42,11 @@ export class ReimburseForm extends Component<IProps> {
       timeOfExpense: 0
     }
 
-    console.log('check 1')
     this.state.items.map(item => {
       let { uid, receipts, edited, ...essentials } = item
       if (JSON.stringify(essentials) === JSON.stringify(baseObj))
         return this.setState({ errors: 'Item(s) must not be blank' })
     })
-    console.log('check 2', this.state.items)
 
     const { username, role, startSubmitReimbursement } = this.props
     const data = {
@@ -54,7 +55,9 @@ export class ReimburseForm extends Component<IProps> {
       role
     }
 
-    startSubmitReimbursement(data)
+    startSubmitReimbursement(data).then(() =>
+      this.props.history.push('/dashboard')
+    )
   }
 
   handleItemChange = ({ target }) => {

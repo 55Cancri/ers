@@ -1,6 +1,7 @@
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import * as userDao from '../dao/user-dao'
+import * as reimburseDao from '../dao/reimburse-dao'
 import { userInfo } from 'os'
 
 export const signup = dossier => {
@@ -14,7 +15,7 @@ export const signup = dossier => {
     if (data.Items.length === 0) {
       // create variable that will store promise result of signup -> findOne(user + token)
       const createThenVerify = userDao.signup(dossier).then(() =>
-        userDao.findOne(dossier.username).then(data => {
+        userDao.findOne(dossier.username).then(async data => {
           // normalize nested result from db query
           const user = data.Items[0]
 
@@ -24,6 +25,21 @@ export const signup = dossier => {
             process.env.JWT_SECRET
           )
           user['token'] = token
+          let superUser
+
+          if (dossier.role === 'admin') {
+            const statusQuery = await reimburseDao
+              .getDataByIndex('pending')
+              .then(pendingTickets => {
+                user['pendingTickets'] = pendingTickets.Items
+                return user
+              })
+          }
+
+          console.log(
+            'user with admin should now have all pending requests',
+            user
+          )
 
           // return user object in promise chain to createThenVerify variable
           return user
@@ -40,9 +56,18 @@ export const signup = dossier => {
 export const login = credentials => {
   const { username, password } = credentials
 
-  const clearance = userDao.findOne(username).then(data => {
+  const clearance = userDao.findOne(username).then(async data => {
     let proceed = false
     const user = data.Items[0]
+
+    if (user.role === 'admin') {
+      const statusQuery = await reimburseDao
+        .getDataByIndex('pending')
+        .then(pendingTickets => {
+          user['pendingTickets'] = pendingTickets.Items
+          return user
+        })
+    }
 
     // create and add token to user object
     const token = user
@@ -61,11 +86,20 @@ export const login = credentials => {
 }
 
 export const getUser = username =>
-  userDao.findOne(username).then(dossier => dossier)
-
-// export const findAllByYear = (year: number) => movieDao.findAllByYear(year)
-
-// export const findByYearAndTitle = (year: number, title: string) =>
-//   movieDao.findByYearAndTitle(year, title)
-
-// export const update = (movie: any) => movieDao.update(movie)
+  userDao.findOne(username).then(async dynamoData => {
+    // find user first
+    const dossier = dynamoData.Items[0]
+    // check if user is admin
+    if (dossier.role === 'admin') {
+      // if they are, fetch all pending reimbursements
+      const statusQuery = await reimburseDao
+        .getDataByIndex('pending')
+        .then(pendingTickets => {
+          // then attach them to the dossier
+          dossier['pendingTickets'] = pendingTickets.Items
+          return dossier
+        })
+    }
+    // user data will have all tickets if admin
+    return dossier
+  })

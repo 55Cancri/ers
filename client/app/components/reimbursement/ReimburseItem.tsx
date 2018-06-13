@@ -3,7 +3,6 @@ import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 import fontawesome from '@fortawesome/fontawesome'
 
 export const ReimburseItem = props => {
-  // const { handleItemChange, itemData } = props
   const {
     handleAddItem,
     handleItemChange,
@@ -11,6 +10,7 @@ export const ReimburseItem = props => {
     index,
     itemData: { uid, title, type, amount, description, receipts }
   } = props
+
   return (
     <div id={uid} onFocus={handleAddItem} data-position={index}>
       <label htmlFor="title">title</label>
@@ -47,11 +47,7 @@ export const ReimburseItem = props => {
         value={receipts}
         onChange={handleItemChange}
       />
-      <FontAwesomeIcon
-        icon="times"
-        onClick={el => handleRemoveItem(uid)}
-        // onClick={() => console.log('hi')}
-      />
+      <FontAwesomeIcon icon="times" onClick={el => handleRemoveItem(uid)} />
     </div>
   )
 }

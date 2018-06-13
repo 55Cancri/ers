@@ -26,7 +26,6 @@ export const startPersist = identity => {
 export const startLogin = credentials => dispatch =>
   api.user.login(credentials).then(user => {
     localStorage.ers = user.token
-    // dispatch(login(user))
     dispatch({
       type: 'LOGIN',
       user
