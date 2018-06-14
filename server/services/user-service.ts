@@ -19,13 +19,15 @@ export const signup = dossier => {
           // normalize nested result from db query
           const user = data.Items[0]
 
+          // create empty reimbursements list to user object
+          user['reimbursements'] = []
+
           // create and add token to user object
           const token = jwt.sign(
             { username: user.username },
             process.env.JWT_SECRET
           )
           user['token'] = token
-          let superUser
 
           if (dossier.role === 'admin') {
             const statusQuery = await reimburseDao
@@ -35,11 +37,6 @@ export const signup = dossier => {
                 return user
               })
           }
-
-          console.log(
-            'user with admin should now have all pending requests',
-            user
-          )
 
           // return user object in promise chain to createThenVerify variable
           return user
@@ -60,7 +57,7 @@ export const login = credentials => {
     let proceed = false
     const user = data.Items[0]
 
-    if (user.role === 'admin') {
+    if (user && user.role === 'admin') {
       const statusQuery = await reimburseDao
         .getDataByIndex('pending')
         .then(pendingTickets => {

@@ -5,7 +5,7 @@ interface IAction {
   payload?: any
 }
 
-const initialState = {}
+const initialState = { dataIsHere: false }
 
 export const miscellaneousReducer = (
   state = initialState,
@@ -13,43 +13,18 @@ export const miscellaneousReducer = (
 ) => {
   switch (action.type) {
     case 'REQUEST':
-      console.log('now in reducer after db submit')
       return {
         ...state,
         reimbursements: action.reimbursements
       }
 
-    case 'DISTRIBUTE':
+    case 'LOGIN':
       return {
-        ...state
-        // oldUndistributedCash: state.newUndistributedCash,
-        // newUndistributedCash: action.user.undistributedCash
+        dataIsHere: true
       }
 
-    case 'DELETE':
-      return {
-        ...state
-        // oldPoints: state.newPoints,
-        // newPoints: action.user.points,
-        // oldUndistributedCash: state.newUndistributedCash,
-        // newUndistributedCash: action.user.undistributedCash
-      }
-
-    case 'WIPE':
-      return {
-        ...state
-        // oldUndistributedCash: state.newUndistributedCash,
-        // newUndistributedCash: action.user.undistributedCash
-      }
-
-    case 'NUKE':
-      return {
-        ...state
-        // oldPoints: 100,
-        // newPoints: 100,
-        // oldUndistributedCash: state.newUndistributedCash,
-        // newUndistributedCash: action.user.undistributedCash
-      }
+    case 'LOGOUT':
+      return {}
 
     default:
       return state

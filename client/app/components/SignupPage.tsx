@@ -154,7 +154,6 @@ export class SignupPage extends Component<ClassProps, ClassState> {
       password: this.state.password,
       role: admin ? 'admin' : 'employee'
     }
-    console.log('here are your credentials: ', data)
 
     // passed down from connect
     this.props
@@ -163,7 +162,7 @@ export class SignupPage extends Component<ClassProps, ClassState> {
         this.props.history.push('/dashboard')
       })
       .catch(err => {
-        console.log('well now we have a problem: ', err)
+        console.log('Error on submit in signup page: ', err)
         this.setState({ errors: err.response.data.errors })
       })
   }

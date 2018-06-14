@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { RouteProps } from 'react-router'
-// import { RouteComponentProps } from 'react-router-dom'
 import ReimburseItem from './ReimburseItem'
 import { generateUuid } from '../../helpers/helpers'
 import { startSubmitReimbursement } from '../../actions/app'
@@ -195,7 +194,6 @@ export class ReimburseForm extends Component<IProps> {
 
     // if editing field on same row, don't do anything
     // if (prevIndex !== index) return
-
     console.log('prev index: ', prevIndex, 'curr index: ', index)
 
     // if last object is not empty, generate empty field

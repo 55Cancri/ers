@@ -72,12 +72,8 @@ export class Header extends Component<Props> {
             <DropdownItem className="dropdown-item">
               <Link to="/settings">Settings</Link>
             </DropdownItem>
-            <DropdownItem className="dropdown-item">
-              {isAuthenticated ? (
-                <p className="logout" onClick={() => startLogout()}>
-                  Logout
-                </p>
-              ) : null}
+            <DropdownItem className="dropdown-item" onClick={() => startLogout()}>
+              {isAuthenticated ? <p className="logout">Logout</p> : null}
             </DropdownItem>
           </DropdownMenu>
         </Dropdown>
@@ -92,6 +88,9 @@ const mapStateToProps = (state): StateProps => {
   }
 }
 
-export default connect<StateProps, DispatchProps>(mapStateToProps, {
-  startLogout
-})(Header)
+export default connect<StateProps, DispatchProps>(
+  mapStateToProps,
+  {
+    startLogout
+  }
+)(Header)

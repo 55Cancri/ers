@@ -1,33 +1,6 @@
 import React from 'react'
 import api from '../api'
 
-export const setUser = data => ({
-  type: 'INITIAL_DATA',
-  data
-})
-
-export const startSetUser = email => dispatch => {
-  api.user.getUser(email).then(user => {
-    // set what information is put in redux on reloads
-    dispatch(
-      setUser({
-        // wants: user.wants,
-        // needs: user.needs
-      })
-    )
-  })
-}
-
-// export const submitRequest = request => ({
-//   type: 'REQUEST',
-//   request
-// })
-
-// export const startSubmitRequest = reimbursement => dispatch =>
-//   api.user
-//     .submitReimbursement(reimbursement)
-//     .then(data => dispatch(reimbursement))
-
 export const submitReimbursement = data => ({
   type: 'SUBMIT',
   data
@@ -37,6 +10,17 @@ export const startSubmitReimbursement = data => dispatch =>
   api.user
     .submitReimbursement(data)
     .then(user => dispatch(submitReimbursement(user)))
+
+export const updateReimbursements = updateReimbursements => ({
+  pendingTickets: updateReimbursements,
+  type: 'VERDICTS'
+})
+
+export const startVerdicts = verdict => dispatch =>
+  api.user.issueVerdicts(verdict).then(withNewReimbursements => {
+    console.log('now about to dispatch...', withNewReimbursements)
+    return dispatch(updateReimbursements(withNewReimbursements))
+  })
 
 export const deleteAccount = user => ({
   type: 'DELETE',

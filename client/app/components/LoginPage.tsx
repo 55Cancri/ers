@@ -108,7 +108,10 @@ export class LoginPage extends Component<IProps, IState> {
         .then(() => {
           this.props.history.push('/dashboard')
         })
-        .catch(err => this.setState({ errors: err.response.data.errors }))
+        .catch(err => {
+          console.log('front end error', err)
+          return this.setState({ errors: err.response.data.errors })
+        })
     }
   }
 

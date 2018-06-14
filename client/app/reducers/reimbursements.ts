@@ -4,14 +4,21 @@ import React from 'react'
 export const reimburseReducer = (state = {}, action: any = {}) => {
   switch (action.type) {
     case 'LOGIN':
-      console.log('now in reimburse reducer')
       return {
         reimbursements: action.user.reimbursements,
         everyReimbursement: action.user.pendingTickets
       }
 
+    case 'LOGOUT':
+      return {}
+
+    case 'VERDICTS':
+      console.log('action', action.pendingTickets)
+      return {
+        everyReimbursement: action.pendingTickets
+      }
+
     case 'RESTORE':
-      console.log('restore attempt in reim redu..')
       return {
         reimbursements: action.user.reimbursements,
         everyReimbursement: action.user.pendingTickets

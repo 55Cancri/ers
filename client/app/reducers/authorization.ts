@@ -8,7 +8,8 @@ export const authorizationReducer = (state = {}, action: any = {}) => {
         username: action.user.username,
         token: action.user.token,
         role: action.user.role,
-        email: action.user.email
+        email: action.user.email,
+        name: action.user.firstname
       }
 
     case 'PERSIST':

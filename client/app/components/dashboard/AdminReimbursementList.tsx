@@ -3,8 +3,12 @@ import React from 'react'
 export const AdminReimbursementList = props => (
   <div>
     <div>
-      <button>Approve</button>
-      <button>Deny</button>
+      <button data-verdict="approve" onClick={props.submitAdminDecision}>
+        Approve
+      </button>
+      <button data-verdict="deny" onClick={props.submitAdminDecision}>
+        Deny
+      </button>
     </div>
     <table cellSpacing="0" className="reimburse-table">
       <tbody>
@@ -15,12 +19,16 @@ export const AdminReimbursementList = props => (
           <th>Status</th>
           <th>Time Submitted</th>
         </tr>
-        {props.everyReimbursement.map(reim => {
+        {props.everyReimbursement.map((reim, i) => {
           const dayOf = new Date(parseInt(reim.timeSubmitted))
           return (
             <tr key={reim.timeSubmitted} className="reimburse-row">
               <td>
-                <input type="checkbox" />
+                <input
+                  type="checkbox"
+                  onClick={props.updateClicks}
+                  data-key={reim.timeSubmitted}
+                />
               </td>
               <td>{reim.username}</td>
               <td>

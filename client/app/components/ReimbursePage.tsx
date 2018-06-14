@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { RouteProps, withRouter } from 'react-router'
-
 import ReimburseForm from './reimbursement/ReimburseForm'
 
 // need to pass history object to child components

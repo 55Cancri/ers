@@ -21,9 +21,14 @@ export default {
         .then(res => res.data),
 
     submitReimbursement: reimbursement => {
-      console.log("cause I'm for..gotten...")
       return axios
         .post('/submit', { reimbursement }, { headers: getToken() })
+        .then(res => res.data)
+    },
+
+    issueVerdicts: verdict => {
+      return axios
+        .post('/verdicts', { verdict }, { headers: getToken() })
         .then(res => res.data)
     },
 
