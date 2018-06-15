@@ -54,6 +54,7 @@ export const getData = username => {
   return docClient.query(params).promise()
 }
 
+// NOT RETURNING UP TO DATE STATUS CHANGES AFTER APPROVE OR DENY FROM ADMIN
 // search reimbursements by user and most recent submission
 export const getDataByIndex = index => {
   const params = {

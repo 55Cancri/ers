@@ -8,8 +8,13 @@ export class ReimbursePage extends Component<any> {
   // @ts-ignore
   render = () => {
     return (
-      <div>
-        <h1>New reimbursement</h1>
+      <div className="reimbursement-page">
+        <div className="reimburse-header">
+          <h1 className="page-title">New reimbursement </h1>
+          <button className="create-blue button new" form="reimburse-form">
+            Submit
+          </button>
+        </div>
         <ReimburseForm history={this.props.history} />
       </div>
     )

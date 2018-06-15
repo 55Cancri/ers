@@ -12,42 +12,57 @@ export const ReimburseItem = props => {
   } = props
 
   return (
-    <div id={uid} onFocus={handleAddItem} data-position={index}>
-      <label htmlFor="title">title</label>
+    <div
+      id={uid}
+      onFocus={handleAddItem}
+      data-position={index}
+      className="reimbursement-item"
+    >
       <input
         type="text"
         name="title"
         value={title}
+        placeholder="title"
         onChange={handleItemChange}
       />
-      <label htmlFor="type">type</label>
-      <select name="type" value={type} onChange={handleItemChange}>
-        <option value="lodging">lodging</option>
-        <option value="travel">travel</option>
-        <option value="food">food</option>
-        <option value="other">other</option>
-      </select>
-      <label htmlFor="amount">amount</label>
       <input
         type="text"
         name="amount"
         value={amount}
+        placeholder="amount"
         onChange={handleItemChange}
       />
-      <label htmlFor="description">description</label>
       <textarea
         name="description"
         value={description}
+        placeholder="more details"
         onChange={handleItemChange}
       />
-      <label htmlFor="receipts">receipts</label>
+
       <input
+        style={{ display: 'none' }}
+        name="file"
         type="file"
-        name="receipts"
-        value={receipts}
-        onChange={handleItemChange}
+        accept=".jpg,.jpeg,.png,.webp"
+        // onChange={this.onUploadImage}
+        ref={fileInput => (this.fileInput = fileInput)}
       />
-      <FontAwesomeIcon icon="times" onClick={el => handleRemoveItem(uid)} />
+      <button
+        type="submit"
+        className="receipts button upload"
+        onClick={e => {
+          e.preventDefault()
+          this.fileInput.click()
+        }}
+      >
+        <FontAwesomeIcon icon="upload" size="xs" className="fa-upload" />Upload
+      </button>
+
+      <FontAwesomeIcon
+        icon="times"
+        className="fa-times"
+        onClick={el => handleRemoveItem(uid)}
+      />
     </div>
   )
 }

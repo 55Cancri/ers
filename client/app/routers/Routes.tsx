@@ -107,6 +107,7 @@ export class Pages extends Component<IProps, IState> {
             open={this.state.sidebarOpen}
             docked={this.state.sidebarDocked}
             onSetOpen={this.onSetSidebarOpen}
+            sidebarClassName="sidebar"
             transitions={false}
           >
             <PrivateRoute path="/create" component={ReimbursePage} />

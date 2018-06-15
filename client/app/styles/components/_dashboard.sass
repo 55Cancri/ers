@@ -1,5 +1,140 @@
 
 
+.page-header
+  display: flex
+  align-items: center
+  justify-content: space-between
+  width: 80%
+  min-width: 860px
+  margin: 20px auto 20px
+  font-weight: 500
+  font-size: 4rem
+
+  h1
+    margin: 0
+
+.page-title
+  font-weight: 500
+  font-size: 4rem
+
+.reimburse-table
+  width: 80%
+  margin: 0 auto 60px
+  border: 1px solid $br-grey
+  border-radius: 5px
+  border-collapse: collapse
+  background-color: $white
+  // table-layout: fixed
+
+  tbody
+    max-height: 10vh
+    padding: 25px
+    // display: block
+    overflow-y: scroll
+    &::-webkit-scrollbar
+      // size
+      width: 7px
+      // background
+      -webkit-box-shadow: none
+
+    &::-webkit-scrollbar-thumb
+      // bar color
+      background-color: $br-grey
+      // bar curve
+      border-radius: 25px
+
+  tr
+    &:first-of-type
+      
+    &:not(:first-of-type)
+      border-bottom: 1px solid $br-grey
+
+    th
+      padding: 50px 50px 5px
+      text-align: left
+      text-transform: uppercase
+      letter-spacing: 1px
+      font-size: 2.2rem
+      font-weight: 600
+      color: $td-text
+
+    td
+      font-size: 2.2rem
+      padding: 20px 50px
+      text-align: left
+      color: $td-text
+
+      &:first-of-type
+
+
+.reimburse-headers
+  text-align: left
+
+.reimburse-row
+  transition: all .3s
+
+  &:hover
+    background-color: $hover-select-grey
+
+.selected-row
+  background-color: $hover-select-grey
+
+.button-group
+  display: flex
+  justify-content: flex-end
+  width: 80%
+  margin: 0 auto 10px
+
+.button
+  width: 150px
+  padding: 10px 15px
+  outline: none
+  border: none
+  border-radius: 5px
+  text-transform: uppercase
+  letter-spacing: 1.5px
+  font-size: 1.8rem
+  font-weight: 600
+  color: white
+
+  &:hover
+    filter: brightness(94%)
+    transform: translateY(-1px)
+    box-shadow: 0 7px 14px rgba(50,50,93,.1), 0 3px 6px rgba(0,0,0,.08)
+    transition: all .3s
+
+.approve
+  background-color: $approve-green
+  margin-right: 15px
+
+.deny
+  background-color: $deny-red
+
+.new
+  background-color: $create-blue
+
+.upload
+  color: $td-text
+  background-color: $hover-select-grey
+
+.fa-plus
+  margin-right: 10px
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .main-body
   margin: 0 25px 0 75px
   // position: relative

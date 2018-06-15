@@ -119,16 +119,12 @@ export class LoginPage extends Component<IProps, IState> {
     const { errors } = this.state
     return (
       <div className="login-page">
-        <Link to="/" className="seam">
-          Revature
-        </Link>
         <form
-          className="auth-form"
+          className="login-form"
           onChange={this.onFieldChange}
           onSubmit={this.onSubmit}
         >
-          {errors.global && <p className="errors-global">{errors.global}</p>}
-          <h2 className="header">Login</h2>
+          {errors.global && <p className="global-errors">{errors.global}</p>}
           <div className="input-group">
             <label className="title">username</label>
             <input
@@ -156,13 +152,13 @@ export class LoginPage extends Component<IProps, IState> {
             )}
           </div>
           <div className="input-group">
-            <button type="submit" className="submit">
+            <button type="submit" className="login-button button">
               Login
             </button>
           </div>
-          <div className="other-page">
+          <div className="switch-auth-form">
             <p className="text">Don't have an account?</p>
-            <Link to="/signup" className="link">
+            <Link to="/signup" className="signup-link">
               &nbsp;Signup
             </Link>
           </div>

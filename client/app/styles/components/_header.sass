@@ -6,16 +6,41 @@ a
   display: flex
   justify-content: center
   align-items: center
-  margin: 15px 25px 0
-
-  .seam, .seam-sm
-    margin-left: 10px
-    color: $want-green-text
-    font: normal $l 'Salsa', sans-serif
+  margin: 10px 25px
 
   .alerts
+    font-size: 24px
+
+    @media (min-width: 1600px)
+      font-size: 32px
+
+  .nav-username
+    font-size: 24px
+    margin-right: 22px
+
+    @media (min-width: 1600px)
+      font-size: 32px
+
+
+  .fa-angle-down
+    font-size: 28px
+
+    @media (min-width: 1600px)
+      margin-right: 25px
+      font-size: 36px
+
+  .settings
+    font-size: 22px
+
+    @media (min-width: 1600px)
+      font-size: 28px
 
   .logout
+    font-size: 22px
+
+    @media (min-width: 1600px)
+      font-size: 28px
+
 
 .search-group
   position: relative
@@ -23,15 +48,40 @@ a
   width: max-content
 
   .icon
-    top: 5px
-    left: 10px
+    top: 15px
+    left: 18px
     position: absolute
-  
+    color: darken($hover-select-grey, 15%)
+
+    @media (min-width: 1600px)
+      top: 16px
+      left: 23px
+      font-size: 28px
+
   .input
-    padding-left: 35px
+    width: 35vw
+    font-size: 24px
+    padding: 5px 10px
+    padding-left: 50px
+    border-radius: 8px
     border: none
+    color: $td-text
 
+    &::placeholder
+      color: darken($hover-select-grey, 45%)
 
+    @media (min-width: 1600px)
+      padding: 5px 10px
+      padding-left: 70px
+      font-size: 32px
+
+  &:hover
+    transform: translateY(-2px)
+    box-shadow: 0 7px 14px rgba(50,50,93,.1), 0 3px 6px rgba(0,0,0,.08)
+    transition: all .3s
+
+  @media (min-width: 1600px)
+    font-size: 36px
 
 .navbar-toggle
   display: inline-block
@@ -43,6 +93,5 @@ a
   background-color: transparent
 
 
-@media (min-width: 800px)
-  .bars, .seam-sm
-    display: none
+.bars, .seam-sm
+  display: none

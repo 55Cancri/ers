@@ -4,7 +4,6 @@ import { Link, RouteComponentProps } from 'react-router-dom'
 import moment from 'moment'
 import numeral from 'numeral'
 import Spinner from 'react-spinkit'
-import { withRouter } from 'react-router'
 import fontawesome from '@fortawesome/fontawesome'
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 
@@ -81,7 +80,11 @@ export class DashboardPage extends Component<IProps> {
 
   updateClicks = ({ target }) => {
     // time submitted
-    const time = target.dataset.key
+    const time =
+      target.nodeName === 'TD'
+        ? target.parentNode.dataset.key
+        : target.dataset.key
+
     const updatedArray = this.state.reimbursements.map(item => {
       if (item.timeSubmitted !== time) return item
 
@@ -104,7 +107,35 @@ export class DashboardPage extends Component<IProps> {
 
     return (
       <div>
-        <h1>Dashboard</h1>
+        <div className="page-header">
+          <h1 className="page-title">Dashboard</h1>
+          {identity.role !== 'undefined' &&
+            identity.role === 'employee' && (
+              <button onClick={this.startReimbursement} className="button new">
+                <FontAwesomeIcon icon="plus" className="fa-plus" />
+                New
+              </button>
+            )}
+          {identity.role !== 'undefined' &&
+            identity.role === 'admin' && (
+              <div className="button-group">
+                <button
+                  className="button approve"
+                  data-verdict="approve"
+                  onClick={this.submitAdminDecision}
+                >
+                  Approve
+                </button>
+                <button
+                  className="button deny"
+                  data-verdict="deny"
+                  onClick={this.submitAdminDecision}
+                >
+                  Deny
+                </button>
+              </div>
+            )}
+        </div>
         {identity.role !== 'undefined' && (
           <div>
             {identity.role === 'employee' ? (
@@ -121,9 +152,6 @@ export class DashboardPage extends Component<IProps> {
                     color="darkgray"
                   />
                 )}
-                <button onClick={this.startReimbursement}>
-                  New Reimbursement
-                </button>
               </div>
             ) : (
               // admin dashboard
@@ -133,6 +161,7 @@ export class DashboardPage extends Component<IProps> {
                     updateClicks={this.updateClicks}
                     submitAdminDecision={this.submitAdminDecision}
                     everyReimbursement={everyReimbursement}
+                    state={this.state.reimbursements}
                   />
                 ) : (
                   <Spinner

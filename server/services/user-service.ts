@@ -29,7 +29,7 @@ export const signup = dossier => {
           )
           user['token'] = token
 
-          if (dossier.role === 'admin') {
+          if (user && dossier.role === 'admin') {
             const statusQuery = await reimburseDao
               .getDataByIndex('pending')
               .then(pendingTickets => {

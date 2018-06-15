@@ -14,6 +14,7 @@ import { startLogout } from '../actions/auth'
 
 interface StateProps {
   isAuthenticated: Boolean
+  name: string
 }
 
 interface DispatchProps {
@@ -60,7 +61,8 @@ export class Header extends Component<Props> {
                 }
               }
             />
-            <FontAwesomeIcon icon="angle-down" className="icon" />
+            <p className="nav-username">{this.props.name}</p>
+            <FontAwesomeIcon icon="angle-down" className="icon fa-angle-down" />
           </DropdownToggle>
           <DropdownMenu
             right
@@ -70,9 +72,12 @@ export class Header extends Component<Props> {
             }}
           >
             <DropdownItem className="dropdown-item">
-              <Link to="/settings">Settings</Link>
+              <Link to="/settings" className="settings">Settings</Link>
             </DropdownItem>
-            <DropdownItem className="dropdown-item" onClick={() => startLogout()}>
+            <DropdownItem
+              className="dropdown-item"
+              onClick={() => startLogout()}
+            >
               {isAuthenticated ? <p className="logout">Logout</p> : null}
             </DropdownItem>
           </DropdownMenu>
@@ -84,7 +89,8 @@ export class Header extends Component<Props> {
 
 const mapStateToProps = (state): StateProps => {
   return {
-    isAuthenticated: !!state.auth.token
+    isAuthenticated: !!state.auth.token,
+    name: state.auth.name
   }
 }
 

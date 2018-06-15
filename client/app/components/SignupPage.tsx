@@ -52,6 +52,7 @@ export class SignupPage extends Component<ClassProps, ClassState> {
 
   // accessibility
   listenKeyboard = e => {
+    // gta v cheat code
     const code = ['>', 'a', '>', '<', '>', 'rb', '>', '<', 'a', 'y']
     const { cheat: command } = this.state
 
@@ -115,7 +116,7 @@ export class SignupPage extends Component<ClassProps, ClassState> {
       if (this.state.cheat.join(',') === code.join(',')) {
         this.promiseState({ admin: true })
         window.removeEventListener('keydown', this.listenKeyboard, true)
-        alert('cheat code active')
+        alert('Cheat code: active')
       }
     }
     // if (e.key === 'Escape' || e.keyCode === 27) {
@@ -168,34 +169,47 @@ export class SignupPage extends Component<ClassProps, ClassState> {
   }
 
   render() {
-    const { errors } = this.state
+    const { errors, admin } = this.state
     return (
-      <div className="signup-page">
+      // @ts-ignore
+      {admin && <img src="https://png.icons8.com/color/160/crown.png"/>}
+      <div
+        className="signup-page"
+        style={{
+          background: admin
+            ? `url(
+                'https://png.icons8.com/color/160/crown.png'
+              ) no repeat`
+            : 'none',
+          backgroundSize: 'cover'
+        }}
+      >
+        {/* {admin ? 'hacker hat here' : null} */}
         <form
           autoComplete="off"
-          className="form"
+          className="signup-form"
           onChange={this.onFieldChange}
           onSubmit={this.onSubmit}
         >
-          <div className="form-group">
+          <div className="input-group">
             <label htmlFor="email" className="title">
               email
             </label>
             <input type="email" name="email" />
           </div>
-          <div className="form-group">
+          <div className="input-group">
             <label htmlFor="fullname" className="title">
               full name
             </label>
             <input type="text" name="fullname" />
           </div>
-          <div className="form-group">
+          <div className="input-group">
             <label htmlFor="username" className="title">
               username
             </label>
             <input type="text" name="username" />
           </div>
-          <div className="form-group">
+          <div className="input-group">
             <label htmlFor="password" className="title">
               password
             </label>
@@ -205,14 +219,14 @@ export class SignupPage extends Component<ClassProps, ClassState> {
               autoComplete="new-password"
             />
           </div>
-          <div className="form-group">
-            <button type="submit" className="submit">
+          <div className="input-group">
+            <button type="submit" className="signup-button button">
               Signup
             </button>
           </div>
-          <div className="other-page">
+          <div className="switch-auth-form">
             <p className="text">Already have an account?</p>
-            <Link to="/login" className="link">
+            <Link to="/login" className="login-link">
               &nbsp;Login
             </Link>
           </div>

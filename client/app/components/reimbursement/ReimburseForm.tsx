@@ -4,6 +4,8 @@ import { RouteProps } from 'react-router'
 import ReimburseItem from './ReimburseItem'
 import { generateUuid } from '../../helpers/helpers'
 import { startSubmitReimbursement } from '../../actions/app'
+import FontAwesomeIcon from '@fortawesome/react-fontawesome'
+import fontawesome from '@fortawesome/fontawesome'
 
 interface IProps extends RouteProps {
   role: string
@@ -18,14 +20,14 @@ export class ReimburseForm extends Component<IProps> {
       {
         uid: '',
         title: '',
-        type: 'lodging',
-        amount: '0',
+        amount: '',
         description: '',
         receipts: [],
         timeOfExpense: 0,
         edited: false
       }
     ],
+    type: 'lodging',
     prevIndex: null,
     errors: ''
   }
@@ -35,8 +37,7 @@ export class ReimburseForm extends Component<IProps> {
 
     const baseObj = {
       title: '',
-      type: 'lodging',
-      amount: '0',
+      amount: '',
       description: '',
       timeOfExpense: 0
     }
@@ -50,6 +51,7 @@ export class ReimburseForm extends Component<IProps> {
     const { username, role, startSubmitReimbursement } = this.props
     const data = {
       items: this.state.items,
+      type: this.state.type,
       username,
       role
     }
@@ -57,6 +59,10 @@ export class ReimburseForm extends Component<IProps> {
     startSubmitReimbursement(data).then(() =>
       this.props.history.push('/dashboard')
     )
+  }
+
+  handleTypeChange = ({ target }) => {
+    this.setState({ type: target.value })
   }
 
   handleItemChange = ({ target }) => {
@@ -73,12 +79,6 @@ export class ReimburseForm extends Component<IProps> {
           return {
             ...item,
             title: target.value,
-            edited: true
-          }
-        case 'type':
-          return {
-            ...item,
-            type: target.value,
             edited: true
           }
         case 'amount':
@@ -163,8 +163,7 @@ export class ReimburseForm extends Component<IProps> {
           {
             uid: generateUuid(),
             title: '',
-            type: 'lodging',
-            amount: '0',
+            amount: '',
             description: '',
             receipts: [],
             timeOfExpense: 0
@@ -175,8 +174,7 @@ export class ReimburseForm extends Component<IProps> {
     // comparison object
     const baseObj = {
       title: '',
-      type: 'lodging',
-      amount: '0',
+      amount: '',
       description: '',
       timeOfExpense: 0
     }
@@ -231,9 +229,41 @@ export class ReimburseForm extends Component<IProps> {
 
   // @ts-ignore
   render = () => {
-    const { items, errors } = this.state
+    const { items, errors, type } = this.state
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form
+        id="reimburse-form"
+        onSubmit={this.handleSubmit}
+        className="reimbursement-form"
+      >
+        <div className="type-header">
+          <label htmlFor="type" className="type-label">
+            type
+          </label>
+          <FontAwesomeIcon
+            icon="angle-down"
+            size="xs"
+            className="fa-angle-down"
+          />
+          <select
+            name="type"
+            value={type}
+            onChange={this.handleTypeChange}
+            className="select-type"
+          >
+            <option value="lodging">lodging</option>
+            <option value="travel">travel</option>
+            <option value="food">food</option>
+            <option value="other">other</option>
+          </select>
+        </div>
+        <div className="reimbursement-labels">
+          <label htmlFor="title">title</label>
+          <label htmlFor="amount">amount</label>
+          <label htmlFor="description">description</label>
+          <label htmlFor="receipts">receipts</label>
+        </div>
+        <div />
         {this.state.items.map((item, i) => {
           return (
             <ReimburseItem
@@ -247,7 +277,6 @@ export class ReimburseForm extends Component<IProps> {
           )
         })}
         {errors && <p>{errors}</p>}
-        <button>Submit</button>
       </form>
     )
   }

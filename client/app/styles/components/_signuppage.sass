@@ -1,0 +1,70 @@
+// .signup-page
+//   display: grid
+//   height: 100vh
+//   // background-color: dodgerblue
+//   background: url('https://image.ibb.co/dYK6OT/simon_abrams_286276_unsplash_min.jpg') no-repeat
+//   background-size: cover
+//   // background-color: dodgerblue
+
+
+
+.signup-page
+  display: grid
+  align-content: center
+  justify-content: center
+  height: 100vh
+
+  .signup-form
+    width: 35vw
+    max-width: 500px
+  
+    .input-group
+      .title
+        padding-bottom: 5px
+        margin: 0
+        text-transform: uppercase
+        letter-spacing: 1px
+        font-size: 18px
+        font-weight: 600
+        color: $titlegrey
+
+        &:last-of-type
+          padding: 10px 0 5px
+      
+      input
+        height: 42px
+        border-radius: 5px
+
+    .global-errors
+      padding: 5px 0
+      margin: 0
+      text-align: center
+      font-size: 21px
+      font-weight: 700
+      color: $error-red
+      border-left: 4px solid $error-red
+      background-color: $error-red-bg
+        
+
+    .inline-errors
+      margin: 5px 0 0
+      color: $error-red
+      font-size: 18px
+
+    .signup-button
+      margin: 15px 0 5px
+      width: 100%
+      background-color: $create-blue
+
+    .switch-auth-form
+      display: flex
+      align-items: center
+      font-size: 18px
+      color: $td-text
+
+    p
+      margin: 8px 0 0
+
+    .login-link
+      margin: 8px 0 0
+      color: $create-blue

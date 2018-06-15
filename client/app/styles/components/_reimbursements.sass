@@ -1,0 +1,169 @@
+.reimbursement-page
+  width: 80%
+  margin: 0 auto
+
+.reimburse-header
+  display: grid
+  grid-auto-flow: column
+  grid-template-columns: repeat(4, minmax(100px, 500px))
+  align-items: center
+  justify-items: start
+  margin: 0 auto
+  h1
+    margin: 5px 0 15px
+
+  .page-title
+    grid-column: 1 / span 3
+
+  .button
+    grid-column: -1
+
+.reimbursement-form
+  display: flex
+  flex-direction: column
+  min-width: 860px
+
+  >input:first-of-type
+    border-top-left-radius: 25px
+
+  .type-header
+    display: grid
+    position: relative
+    grid-auto-flow: column
+    grid-template-columns: max-content
+    align-items: center
+
+    .type-label
+      padding-bottom: 10px
+      text-transform: uppercase
+      letter-spacing: 1px
+      font-size: 2.2rem
+      font-weight: 600
+      color: $td-text
+      grid-column: 1
+
+    select
+      grid-column: 1
+      margin-bottom: 30px
+      padding: 15px 15px 15px 30px
+      -webkit-appearance: none
+      -moz-appearance: none
+      appearance: none
+      box-sizing: content-box
+      background: $white
+      border: none
+      border-radius: 5px
+      font-size: 2.2rem
+      color: $td-text
+      transition: 300ms all
+
+    .fa-angle-down
+      position: absolute
+      bottom: 45px
+      left: 10px
+      font-size: 24px
+      color: lighten($td-text, 55%)
+
+.reimbursement-labels
+  display: grid
+  grid-auto-flow: column
+  grid-template-columns: repeat(4, 1fr)
+  justify-content: space-around
+
+  label
+    padding: 0 0 20px
+    text-transform: uppercase
+    letter-spacing: 1px
+    font-size: 2.2rem
+    font-weight: 600
+    color: $td-text
+
+
+.reimbursement-item
+  display: grid
+  grid-template-columns: repeat(4, minmax(100px, 500px))
+  grid-auto-flow: column
+  align-items: center
+  position: relative
+
+  input
+    border: none
+    outline: none
+    padding: 10px 10px
+    border: none
+    color: $td-text
+    font-size: 24px
+
+    &:first-of-type
+      padding-left: 20px
+
+  textarea
+    height: 58px
+    border: none
+    resize: none
+    outline: none
+    padding: 10px 10px
+    font-size: 24px
+    color: $td-text
+
+  .receipts
+    margin-left: 10px
+
+  .fa-upload
+    margin-right: 10px
+    font-size: 18px
+
+  .fa-times
+    position: absolute
+    left: -30px
+    font-size: 24px
+    color: $td-text
+
+    &:hover
+      color: $deny-red
+      animation: wiggle .3s 2
+      -ms-animation: wiggle .3s 2
+      -moz-animation: wiggle .3s 2
+      -webkit-animation: wiggle .3s 2
+
+.reimbursement-item[data-position="0"]
+  input
+    &:first-of-type
+      border-top-left-radius: 10px
+
+  textarea:first-of-type
+    border-top-right-radius: 10px
+
+
+@-ms-keyframes wiggle 
+  0%
+    -ms-transform: rotate(12deg)
+  50%
+    -ms-transform: rotate(-12deg)
+  100%
+    -ms-transform: rotate(12deg)
+
+@-moz-keyframes wiggle
+  0%
+    -moz-transform: rotate(12deg)
+  50%
+    -moz-transform: rotate(-12deg)
+  100%
+    -moz-transform: rotate(12deg)
+
+@-webkit-keyframes wiggle
+  0%
+    -webkit-transform: rotate(12deg)
+  50%
+    -webkit-transform: rotate(-12deg)
+  100%
+    -webkit-transform: rotate(12deg)
+
+@keyframes wiggle
+  0%
+    transform: rotate(12deg)
+  50%
+    transform: rotate(-12deg)
+  100%
+    transform: rotate(12deg)
+		

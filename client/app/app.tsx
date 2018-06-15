@@ -14,12 +14,14 @@ import {
   faAngleRight,
   faArrowLeft,
   faPlus,
+  faHome,
   faDollarSign,
   faShoppingCart,
   faSlidersH,
   faSitemap,
   faEraser,
-  faTrash
+  faTrash,
+  faUpload
 } from '@fortawesome/fontawesome-free-solid'
 
 fontawesome.library.add(
@@ -28,6 +30,7 @@ fontawesome.library.add(
   faBars,
   faSearch,
   faBell,
+  faHome,
   faCaretDown,
   faAngleLeft,
   faAngleDown,
@@ -39,7 +42,8 @@ fontawesome.library.add(
   faSlidersH,
   faSitemap,
   faEraser,
-  faTrash
+  faTrash,
+  faUpload
 )
 
 import './styles/styles.sass'
