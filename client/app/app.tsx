@@ -21,7 +21,8 @@ import {
   faSitemap,
   faEraser,
   faTrash,
-  faUpload
+  faUpload,
+  faGlobe
 } from '@fortawesome/fontawesome-free-solid'
 
 fontawesome.library.add(
@@ -43,7 +44,8 @@ fontawesome.library.add(
   faSitemap,
   faEraser,
   faTrash,
-  faUpload
+  faUpload,
+  faGlobe
 )
 
 import './styles/styles.sass'

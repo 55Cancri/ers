@@ -119,6 +119,7 @@ export class LoginPage extends Component<IProps, IState> {
     const { errors } = this.state
     return (
       <div className="login-page">
+        <div className="login-bg" />
         <form
           className="login-form"
           onChange={this.onFieldChange}

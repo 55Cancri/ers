@@ -5,7 +5,11 @@ export const ReimbursementList: SFC<{
 }> = props => {
   const { reimbursements } = props
   if (reimbursements.length === 0)
-    return <div>You have not created any reimbursements yet</div>
+    return (
+      <div className="nothing-to-show">
+        You have not created any reimbursements yet.
+      </div>
+    )
 
   return (
     <table cellSpacing="0" className="reimburse-table">
@@ -17,29 +21,32 @@ export const ReimbursementList: SFC<{
           <th>Status</th>
           <th>Time Submitted</th>
         </tr>
-        {reimbursements.map(record => {
-          const dayOf = new Date(parseInt(record.timeSubmitted))
+        {reimbursements
+          .slice(0)
+          .reverse()
+          .map(record => {
+            const dayOf = new Date(parseInt(record.timeSubmitted))
 
-          return (
-            <tr key={record.timeSubmitted} className="reimburse-row">
-              <td>{record.username}</td>
-              <td>
-                {record.items
-                  .map(item => parseInt(item.amount))
-                  .reduce((total, item) => total + item)}
-              </td>
-              <td>{record.status}</td>
-              <td>
-                {dayOf.getMonth() +
-                  1 +
-                  '/' +
-                  dayOf.getDate() +
-                  '/' +
-                  dayOf.getFullYear()}
-              </td>
-            </tr>
-          )
-        })}
+            return (
+              <tr key={record.timeSubmitted} className="reimburse-row">
+                <td>{record.username}</td>
+                <td>
+                  {record.items
+                    .map(item => parseInt(item.amount))
+                    .reduce((total, item) => total + item)}
+                </td>
+                <td>{record.status}</td>
+                <td>
+                  {dayOf.getMonth() +
+                    1 +
+                    '/' +
+                    dayOf.getDate() +
+                    '/' +
+                    dayOf.getFullYear()}
+                </td>
+              </tr>
+            )
+          })}
       </tbody>
     </table>
   )

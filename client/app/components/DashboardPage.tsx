@@ -108,7 +108,25 @@ export class DashboardPage extends Component<IProps> {
     return (
       <div>
         <div className="page-header">
-          <h1 className="page-title">Dashboard</h1>
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center'
+            }}
+          >
+            <h1 className="page-title">Dashboard</h1>
+            {identity.role === 'admin' && (
+              <img
+                src="https://png.icons8.com/color/160/crown.png"
+                style={{
+                  display: 'inline',
+                  height: '50px',
+                  width: '50px',
+                  marginLeft: '20px'
+                }}
+              />
+            )}
+          </div>
           {identity.role !== 'undefined' &&
             identity.role === 'employee' && (
               <button onClick={this.startReimbursement} className="button new">

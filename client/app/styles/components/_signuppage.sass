@@ -6,22 +6,58 @@
 //   background-size: cover
 //   // background-color: dodgerblue
 
-
-
+  
 .signup-page
   display: grid
   align-content: center
   justify-content: center
   height: 100vh
+  
+  .message
+    position: fixed
+    bottom: 0
+    padding: 15px 25px 15px 15px
+    font-size: 21px
+    font-weight: 500
+    color: $bronze
+    background-color: $done-gold
+    &:after
+      content: ''
+      position: absolute
+      right: -20px
+      height: 0px
+      width: 0px
+      border-left: 30px solid transparent
+      border-right: 30px solid transparent
+      border-top: 30px solid $done-gold
+
+  .signup-bg
+    position: absolute
+    height: 100vh
+    width: 100vw
+    background: url("https://image.ibb.co/fNpRny/agenda_analysis_business_990818.jpg") no-repeat
+    background-size: cover
+    background-position: 6%
+    -webkit-filter: grayscale(100%) brightness(100%)
+    -moz-filter: grayscale(100%) brightness(100%)
+    -o-filter: grayscale(100%) brightness(100%)
+    -ms-filter: grayscale(100%) brightness(100%)
+    filter: grayscale(100%) brightness(100%)
+    opacity: 1
+    z-index: -1
 
   .signup-form
     width: 35vw
-    max-width: 500px
+    max-width: 600px
+    padding: 30px 55px 45px
+    border-radius: 5px
+    background-color: rgba(255, 255, 255, .9)
   
     .input-group
+      margin: 20px 0
+
       .title
         padding-bottom: 5px
-        margin: 0
         text-transform: uppercase
         letter-spacing: 1px
         font-size: 18px
@@ -34,6 +70,10 @@
       input
         height: 42px
         border-radius: 5px
+        font-size: 24px
+        background-color: lighten($buttongrey, 6%)
+        color: $sidebar-black
+        opacity: .8
 
     .global-errors
       padding: 5px 0
@@ -45,14 +85,13 @@
       border-left: 4px solid $error-red
       background-color: $error-red-bg
         
-
     .inline-errors
       margin: 5px 0 0
       color: $error-red
       font-size: 18px
 
     .signup-button
-      margin: 15px 0 5px
+      margin: 25px 0 0
       width: 100%
       background-color: $create-blue
 
@@ -63,8 +102,8 @@
       color: $td-text
 
     p
-      margin: 8px 0 0
+      margin: 0
 
     .login-link
-      margin: 8px 0 0
+      margin: 0
       color: $create-blue

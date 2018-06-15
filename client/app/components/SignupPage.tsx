@@ -15,6 +15,7 @@ interface ClassState {
   email: string
   password: string
   cheat: any
+  message: string
   admin: boolean
   errors: {
     username: string
@@ -30,6 +31,7 @@ export class SignupPage extends Component<ClassProps, ClassState> {
     username: '',
     password: '',
     cheat: [],
+    message: '',
     admin: false,
     errors: {
       username: '',
@@ -114,9 +116,12 @@ export class SignupPage extends Component<ClassProps, ClassState> {
     if (this.state.cheat.length > 10) this.promiseState({ cheat: [] })
     const test = () => {
       if (this.state.cheat.join(',') === code.join(',')) {
-        this.promiseState({ admin: true })
+        this.promiseState({
+          admin: true,
+          message: 'You can now sign in as an admin!'
+        })
         window.removeEventListener('keydown', this.listenKeyboard, true)
-        alert('Cheat code: active')
+        // alert('You can now login as an Admin')
       }
     }
     // if (e.key === 'Escape' || e.keyCode === 27) {
@@ -169,28 +174,21 @@ export class SignupPage extends Component<ClassProps, ClassState> {
   }
 
   render() {
-    const { errors, admin } = this.state
+    const { errors, admin, message } = this.state
     return (
-      <div
-        className="signup-page"
-        style={{
-          background: admin
-            ? `url(
-                'https://png.icons8.com/color/160/crown.png'
-              ) no repeat`
-            : 'none',
-          backgroundSize: 'cover'
-        }}
-      >
+      <div className="signup-page">
         {admin && (
           <img
             src="https://png.icons8.com/color/160/crown.png"
             style={{
-              margin: '0 auto'
+              margin: '0 auto',
+              width: '100px',
+              height: '100px',
+              filter: 'brightness(110%)'
             }}
           />
         )}
-        {/* {admin ? 'hacker hat here' : null} */}
+        <div className="signup-bg" />
         <form
           autoComplete="off"
           className="signup-form"
@@ -238,6 +236,7 @@ export class SignupPage extends Component<ClassProps, ClassState> {
           </div>
         </form>
         {!!errors.global && <p>{errors.global}</p>}
+        {message && <div className="message">{message}</div>}
         <div className="signup-overlay" />
         <div className="signup-bg" />
       </div>
