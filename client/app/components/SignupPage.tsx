@@ -171,8 +171,6 @@ export class SignupPage extends Component<ClassProps, ClassState> {
   render() {
     const { errors, admin } = this.state
     return (
-      // @ts-ignore
-      {admin && <img src="https://png.icons8.com/color/160/crown.png"/>}
       <div
         className="signup-page"
         style={{
@@ -184,6 +182,14 @@ export class SignupPage extends Component<ClassProps, ClassState> {
           backgroundSize: 'cover'
         }}
       >
+        {admin && (
+          <img
+            src="https://png.icons8.com/color/160/crown.png"
+            style={{
+              margin: '0 auto'
+            }}
+          />
+        )}
         {/* {admin ? 'hacker hat here' : null} */}
         <form
           autoComplete="off"
