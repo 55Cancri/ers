@@ -58,17 +58,22 @@ export class SignupPage extends Component<ClassProps, ClassState> {
     const code = ['>', 'a', '>', '<', '>', 'rb', '>', '<', 'a', 'y']
     const { cheat: command } = this.state
 
-    // this.setState(prevState => ({ cheat: [...prevState.cheat, 'a'] }))
-    // console.log('check: ', this.state.cheat)
-    // console.log('your keycode, key, and value: ', e.keyCode, e.key, e.value)
+    const checkmark: any = wrong => {
+      if (wrong) return console.clear()
+      else console.log(`%c✓`, `color: springgreen; font-size: 24px`)
+    }
+
+    // check every button on keypress
     switch (e.keyCode || e.key) {
       case 37:
         if (command[2] === '>' || command[6] === '>')
           this.promiseState(prevState => ({
             ...prevState,
             cheat: [...prevState.cheat, '<']
-          })).then(() => test())
-        else this.promiseState({ cheat: [] })
+          }))
+            .then(() => test())
+            .then(() => checkmark())
+        else this.promiseState({ cheat: [] }).then(() => checkmark('wrong'))
         break
       case 39:
         if (
@@ -80,8 +85,13 @@ export class SignupPage extends Component<ClassProps, ClassState> {
           this.promiseState(prevState => ({
             ...prevState,
             cheat: [...prevState.cheat, '>']
-          })).then(() => test())
-        else this.promiseState({ cheat: [] }).then(() => test())
+          }))
+            .then(() => test())
+            .then(() => checkmark())
+        else
+          this.promiseState({ cheat: [] })
+            .then(() => test())
+            .then(() => checkmark('wrong'))
         break
       case 9:
       case 'Tab':
@@ -89,8 +99,13 @@ export class SignupPage extends Component<ClassProps, ClassState> {
           this.promiseState(prevState => ({
             ...prevState,
             cheat: [...prevState.cheat, 'rb']
-          })).then(() => test())
-        else this.promiseState({ cheat: [] }).then(() => test())
+          }))
+            .then(() => test())
+            .then(() => checkmark())
+        else
+          this.promiseState({ cheat: [] })
+            .then(() => test())
+            .then(() => checkmark('wrong'))
         break
       case 65:
       case 'a':
@@ -98,8 +113,13 @@ export class SignupPage extends Component<ClassProps, ClassState> {
           this.promiseState(prevState => ({
             ...prevState,
             cheat: [...prevState.cheat, 'a']
-          })).then(() => test())
-        else this.promiseState({ cheat: [] }).then(() => test())
+          }))
+            .then(() => test())
+            .then(() => checkmark())
+        else
+          this.promiseState({ cheat: [] })
+            .then(() => test())
+            .then(() => checkmark('wrong'))
         break
       case 89:
       case 'y':
@@ -107,26 +127,28 @@ export class SignupPage extends Component<ClassProps, ClassState> {
           this.promiseState(prevState => ({
             ...prevState,
             cheat: [...prevState.cheat, 'y']
-          })).then(() => test())
-        else this.promiseState({ cheat: [] }).then(() => test())
+          }))
+            .then(() => test())
+            .then(() => checkmark())
+        else
+          this.promiseState({ cheat: [] })
+            .then(() => test())
+            .then(() => checkmark('wrong'))
         break
       default:
         this.promiseState({ cheat: [] }).then(() => test())
     }
+
     if (this.state.cheat.length > 10) this.promiseState({ cheat: [] })
     const test = () => {
       if (this.state.cheat.join(',') === code.join(',')) {
         this.promiseState({
           admin: true,
           message: 'You can now sign in as an admin!'
-        })
+        }).then(() => console.log('God Mode: active'))
         window.removeEventListener('keydown', this.listenKeyboard, true)
-        // alert('You can now login as an Admin')
       }
     }
-    // if (e.key === 'Escape' || e.keyCode === 27) {
-    //   this.props.onClose()
-    // }
   }
 
   componentDidMount() {

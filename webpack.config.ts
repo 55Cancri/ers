@@ -41,10 +41,10 @@ const config: webpack.Configuration = {
             loader: 'babel-loader',
             options: {
               babelrc: false,
+              cacheDirectory: true,
               plugins: ['react-hot-loader/babel']
             }
           },
-          // 'babel-loader',
           'awesome-typescript-loader'
         ],
         exclude: /node_modules/

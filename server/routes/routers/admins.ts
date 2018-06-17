@@ -13,7 +13,8 @@ module.exports = app => {
       .getDataByIndex('pending')
       .then(allTickets => {
         console.log('all: ', allTickets)
-        return allTickets.Items
+        return allTickets.Items.slice(0, -1)
+        // return [allTickets.Items.pop()]
       })
       .then(data => res.json(data))
       .catch(err => {
